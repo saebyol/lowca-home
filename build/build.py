@@ -93,6 +93,9 @@ def page(folder, start, title, desc, ogimg):
 <meta property="og:image" content="{SITE_URL}images/{ogimg}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 ''' + ''.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>\n' for x in lds)
     h = head.replace('<title>로우카 쉐어하우스</title>', f'<title>{html.escape(title)}</title>\n' + seo)
     b = body_site
