@@ -117,7 +117,8 @@ a.photo:hover img,a:hover > .photo img{transform:scale(1.03)}
 .room-meta .desc .mean{color:var(--text)}
 .room-meta .card-note{justify-self:start;font-size:12.5px;color:var(--point);border:1px solid currentColor;padding:2px 10px;margin-top:2px}
 .state{font-size:13px;display:flex;flex-wrap:wrap;gap:4px 16px}
-.state .y{color:var(--ok)} .state .n{color:var(--text-light)}
+.state .y{display:inline-flex;align-items:center;height:26px;padding:0 11px;background:#E39A3B;color:#fff;font-weight:500;font-size:12.5px;letter-spacing:.01em}
+.state .n{display:inline-flex;align-items:center;height:26px;padding:0 11px;border:1px solid var(--line);color:var(--text-mid);font-size:12.5px}
 .more{justify-self:start;margin-top:8px;font-size:13px;border-bottom:1px solid var(--text);padding-bottom:1px}
 
 /* facility preview */
@@ -597,6 +598,21 @@ footer{margin-top:120px;background:#2b2a29;color:#bdbab6;font-size:13px}
     </div>
   </section>
 
+  <section id="process">
+    <div class="wrap">
+      <div class="title"><h2 class="en">PROCESS</h2><p class="ko">입주는 이렇게 진행돼요</p></div>
+      <ol class="steps">
+        <li><span class="circle"><span class="no">STEP 1</span>입주 가능일<br>확인</span><p>원하는 기간에 입주할 방을<br>홈페이지에서 먼저 확인해 주세요</p></li>
+        <li class="arrow" aria-hidden="true"></li>
+        <li><span class="circle"><span class="no">STEP 2</span>카카오톡 · 전화<br>상담</span><p>임대료와 계약 내용을<br>자세히 안내해 드려요</p></li>
+        <li class="arrow" aria-hidden="true"></li>
+        <li><span class="circle"><span class="no">STEP 3</span>계약 · 결제</span><p>계약서를 작성하고<br>임대료를 결제하면 입주가 확정돼요</p></li>
+        <li class="arrow" aria-hidden="true"></li>
+        <li><span class="circle"><span class="no">STEP 4</span>입주</span><p>입주 전날 들어오시는 방법과<br>주차 장소를 함께 안내해 드려요</p></li>
+      </ol>
+    </div>
+  </section>
+
   <section id="guide">
     <div class="wrap">
       <div class="title"><h2 class="en">GUIDE</h2><p class="ko">입주 전 안내</p></div>
@@ -645,21 +661,6 @@ footer{margin-top:120px;background:#2b2a29;color:#bdbab6;font-size:13px}
       </div>
     </div>
   </div>
-
-  <section id="process">
-    <div class="wrap">
-      <div class="title"><h2 class="en">PROCESS</h2><p class="ko">입주는 이렇게 진행돼요</p></div>
-      <ol class="steps">
-        <li><span class="circle"><span class="no">STEP 1</span>입주 가능일<br>확인</span><p>원하는 기간에 입주할 방을<br>홈페이지에서 먼저 확인해 주세요</p></li>
-        <li class="arrow" aria-hidden="true"></li>
-        <li><span class="circle"><span class="no">STEP 2</span>카카오톡 · 전화<br>상담</span><p>임대료와 계약 내용을<br>자세히 안내해 드려요</p></li>
-        <li class="arrow" aria-hidden="true"></li>
-        <li><span class="circle"><span class="no">STEP 3</span>계약 · 결제</span><p>계약서를 작성하고<br>임대료를 결제하면 입주가 확정돼요</p></li>
-        <li class="arrow" aria-hidden="true"></li>
-        <li><span class="circle"><span class="no">STEP 4</span>입주</span><p>입주 전날 들어오시는 방법과<br>주차 장소를 함께 안내해 드려요</p></li>
-      </ol>
-    </div>
-  </section>
 
   <section id="check">
     <div class="wrap narrow">
@@ -887,22 +888,22 @@ const COMMON_ITEMS = ["방별 도어락"];
 const ROOMS = [
   { id: "jeumeu", name: "즈므", en: "JEUMEU", type: "1인실", tagline: "따스한 노을이 담긴", focus: "50% 100%",
     card: "해가 저무는 마을이라는 뜻이에요",
-    desc: "창 너머로 노을이 예쁘게 드는 방이라<br>하루의 끝을 조용히 정리하기 좋아요",
+    desc: "노을이 예쁘게 드는 창가에서 하루의 끝을 조용히 정리하기 좋아요",
     summary: "‘즈므’는 해가 저무는 마을이라는 뜻이에요<br>창 너머로 노을이 예쁘게 드는 방이라<br>하루의 끝을 조용히 정리하기 좋아요",
     items: ["침대", "책상", "수납장", "벽걸이 냉난방기"], size: "", rent: "" },
   { id: "sinami", name: "시나미", en: "SINAMI", type: "1인실", tagline: "느긋한 쉼이 있는",
     card: "‘시나미’는 강릉 말로 ‘천천히’라는 뜻이에요",
-    desc: "도심의 빠른 속도에서 잠시 벗어나<br>느긋하게 쉬고 싶은 분께 추천하는 방이에요",
+    desc: "도심의 빠른 속도에서 벗어나 느긋하게 쉬고 싶은 분께 추천해요",
     summary: "‘시나미’는 강릉 말로 ‘천천히’라는 뜻이에요<br>부드러운 빛이 드는 조용한 방이라<br>느긋하게 쉬고 싶은 분께 추천해요",
     items: ["침대", "책상", "수납장", "벽걸이 냉난방기"], size: "", rent: "" },
   { id: "yunseul", name: "윤슬", en: "YUNSEUL", type: "1인실", tagline: "차분한 일상을 위한",
     card: "햇빛과 달빛에 반짝이는 물결을 뜻해요",
-    desc: "윤슬처럼 차분하고 아늑한 방이라<br>혼자만의 시간을 조용히 보내기 좋아요",
+    desc: "윤슬처럼 차분하고 아늑해서 혼자만의 시간을 보내기 좋은 방이에요",
     summary: "‘윤슬’은 햇빛이나 달빛에 반짝이는 물결을 뜻해요<br>윤슬처럼 차분하고 아늑한 방이라<br>혼자만의 시간을 조용히 보내기 좋아요",
     items: ["침대", "책상", "수납장", "벽걸이 냉난방기"], size: "", rent: "" },
   { id: "haseulla", name: "하슬라", en: "HASEULLA", type: "2인 셰어룸", tagline: "따뜻한 일상이 시작되는",
     card: "해와 밝음을 뜻하는 강릉의 옛 지명이에요",
-    desc: "두 분이 함께 쓰는 방으로,<br>서로의 일상과 쉼을 나누며 지낼 수 있어요",
+    desc: "두 분이 함께 쓰며 서로의 일상과 쉼을 나눌 수 있는 방이에요",
     summary: "‘하슬라’는 해와 밝음을 뜻하는 강릉의 옛 지명이에요<br>두 분이 함께 쓰는 셰어룸이라<br>서로의 일상과 쉼을 나누며 지낼 수 있어요",
     items: ["침대 2개", "책상 2개", "수납장", "벽걸이 냉난방기"], size: "", rent: "",
     rentNote: "1인 기준으로 받고, 일행과 함께 계약하시면 할인해 드려요<br>정확한 금액은 따로 문의해 주세요",
@@ -910,9 +911,9 @@ const ROOMS = [
 ];
 const FACILITIES = [
   { key: "living", cover: "living-1.jpg", en: "LIVING ROOM", name: "거실", text: "소파와 라운지 의자, 작업 테이블이 있는 거실이에요<br>책을 읽거나 노트북으로 일하기 좋아요", items: ["소파", "라운지 의자", "작업 테이블", "와이파이"] },
-  { key: "kitchen", cover: "kitchen-1.jpg", en: "KITCHEN", name: "공용 주방", text: "직접 요리해 드실 수 있는 공용 주방이에요<br>컵과 식기, 기본 조리도구가 준비되어 있어요", items: ["냉장고", "전자레인지", "토스터 오븐", "커피 메이커", "전기밥솥", "전기 포트", "식기"] },
+  { key: "kitchen", cover: "kitchen-1.jpg", en: "KITCHEN", name: "공용 주방", text: "직접 요리해 드실 수 있는 공용 주방이에요<br>컵과 식기, 기본 조리도구가 준비되어 있어요", items: ["인덕션", "냉장고", "전자레인지", "에어프라이기", "발뮤다 토스터기", "일리 캡슐머신", "커피 메이커", "전기밥솥", "전기 포트", "음식물처리기", "식기"] },
   { key: "bath", cover: "bath-3.jpg", en: "BATHROOM", name: "화장실·샤워실", text: "남녀 화장실과 샤워실이 따로 나뉘어 있어요", items: ["남녀 분리", "샤워실", "세면대", "수납 선반"] },
-  { key: "laundry", cover: "laundry-1.jpg", en: "LAUNDRY", name: "세탁실", text: "세탁기와 건조기가 있는 별도 세탁실이에요<br>세제도 준비되어 있어요", items: ["세탁기", "건조기", "세제", "빨래 건조대", "다리미"] },
+  { key: "laundry", cover: "laundry-1.jpg", en: "LAUNDRY", name: "세탁실", text: "세탁기와 건조기가 있는 별도 세탁실이에요<br>세제도 준비되어 있어요", items: ["세탁기", "건조기", "세제", "빨래 건조대"] },
   { key: "rooftop", cover: "rooftop-2.jpg", en: "ROOFTOP GARDEN", name: "옥상정원", text: "강릉의 하늘이 가득 담긴 작은 옥상정원이에요<br>조용한 오후나 노을 지는 저녁에 앉아 바람을 쐬기 좋아요", items: ["테이블", "의자", "저녁 조명"] },
   { key: "etc", cover: "etc-2.jpg", en: "AND MORE", name: "그 밖의 공간", text: "천창 아래 계단과 복도도<br>로우카의 분위기를 담아 꾸몄어요", items: [] }
 ];
@@ -1327,7 +1328,7 @@ const STAYS = {
       ["SIMPLE", "따로 챙길 비용이 적어요", "공과금과 관리비, 인터넷이<br>임대료에 모두 포함되어 있어요"]
     ],
     info: [["가까운 병원", "강릉의료원 차로 약 5분<br>강릉동인병원 차로 약 7분<br>강릉아산병원 차로 약 10~15분"], ["이용 기간", "최소 6박 ~ 최대 6개월"], ["임대료", "한 달 기준 약 40~65만 원 (예시 금액)<br>지내시는 기간에 따라 인하해 드려요"], ["보증금", "10~30만 원"]],
-    faq: ["강릉아산병원 실습 기간에 지내기 괜찮을까요?", "며칠부터 지낼 수 있나요?", "임대료 말고 따로 드는 비용이 있나요?", "무엇을 챙겨 가야 하나요?", "한 달 넘게 지내면 임대료는 어떻게 내나요?"]
+    faq: ["강릉 병원 실습으로 방문하는데 지내기 괜찮을까요?", "며칠부터 지낼 수 있나요?", "임대료 말고 따로 드는 비용이 있나요?", "무엇을 챙겨 가야 하나요?", "한 달 넘게 지내면 임대료는 어떻게 내나요?"]
   },
   business: {
     crumb: "강릉 출장 · 교육", en: "BUSINESS", h1: "강릉 출장 · 교육 기간, 역 앞에서 지내기",
@@ -1337,7 +1338,7 @@ const STAYS = {
       ["STATION", "강릉역 도보 5분", "KTX에서 내려 걸어서 바로 들어올 수 있어<br>짐이 많아도 오가기 편해요"],
       ["WORK", "일하기 좋은 환경", "와이파이와 방마다 책상이 있고, 공용 복합기를 쓸 수 있어요<br>필요 시 24인치 사무용 모니터도 대여해 드려요"],
       ["ACCESS", "주요 업무지까지 가까워요", "강릉시청은 차로 약 8분,<br>강릉과학산업단지는 약 15분 거리예요"],
-      ["PAYMENT", "결제는 편한 방법으로", "계약서를 작성한 뒤<br>카드나 계좌이체로 결제하실 수 있어요"]
+      ["CONTRACT", "계약은 간단하게", "상담 후 계약서를 작성하고<br>임대료를 결제하시면 입주가 확정돼요"]
     ],
     info: [["교통", "KTX 강릉역 도보 5분<br>시외·고속버스터미널 차로 약 7분"], ["가까운 업무지", "강릉시청 차로 약 8분<br>강릉원주대학교·가톨릭관동대학교 차로 약 10분<br>강릉과학산업단지 차로 약 15분"], ["업무 환경", "와이파이, 방마다 책상, 거실 작업 테이블<br>공용 복합기(출력, 스캔, 복사), 24인치 모니터 대여"], ["이용 기간", "최소 6박 ~ 최대 6개월"]],
     faq: ["출장이나 교육으로 지내기에도 괜찮나요?", "노트북으로 일하기 괜찮을까요?", "결제는 어떻게 하나요?", "며칠부터 지낼 수 있나요?", "주차할 수 있나요?"]
@@ -1349,7 +1350,7 @@ const STAYS = {
     points: [
       ["WALK", "걸어서 닿는 일상", "월화거리는 걸어서 5분, 홈플러스는 10분,<br>강릉 중앙시장은 15분이면 닿아요"],
       ["SEA", "바다까지 15분", "안목해변 커피거리는 차로 약 12분,<br>경포대는 약 15분 거리예요"],
-      ["KITCHEN", "직접 해 먹는 하루", "공용 주방에 냉장고와 전기밥솥, 식기까지 갖춰져 있어<br>장을 봐 와서 편하게 요리할 수 있어요"],
+      ["KITCHEN", "직접 해 먹는 하루", "공용 주방에 인덕션과 에어프라이기, 식기까지 갖춰져 있어<br>장을 봐 와서 편하게 요리할 수 있어요"],
       ["ROOFTOP", "노을 지는 옥상정원", "하루를 마무리하는 저녁에는<br>옥상정원에서 강릉의 하늘을 바라보세요"]
     ],
     info: [["이용 기간", "최소 6박 ~ 최대 6개월<br>일주일 살기도, 한 달 살기도 가능해요"], ["임대료", "한 달 기준 약 40~65만 원 (예시 금액)<br>지내시는 기간에 따라 인하해 드려요"], ["임대료 포함", "공과금, 관리비, 인터넷, 공용 비품"], ["준비물", "침구, 수건, 세면도구 같은 개인 물품"]],
