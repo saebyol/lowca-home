@@ -82,8 +82,7 @@ def page(folder, start, title, desc, ogimg):
     lds = [biz] + ([faq_ld] if start == 'faq' else [])
     seo = f'''<meta name="description" content="{html.escape(desc)}">
 <meta name="keywords" content="{KEYWORDS}">
-<!-- 네이버 서치어드바이저 소유 확인 태그를 아래 줄에 붙여 넣으세요 -->
-<!-- <meta name="naver-site-verification" content="여기에-코드"> -->
+<meta name="naver-site-verification" content="ac5804994360720ee1ff4a7de1af9a650e8bdc6e">
 <link rel="canonical" href="{url}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="로우카 쉐어하우스">
