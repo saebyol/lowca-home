@@ -139,8 +139,7 @@ a.photo:hover img,a:hover > .photo img{transform:scale(1.03)}
 .room-meta .desc .mean{color:var(--text)}
 .room-meta .card-note{justify-self:start;font-size:12.5px;color:var(--point);border:1px solid currentColor;padding:2px 10px;margin-top:2px}
 .state{font-size:13px;display:flex;flex-wrap:wrap;gap:4px 16px}
-.state .y{display:inline-flex;align-items:center;height:26px;padding:0 11px;background:#E39A3B;color:#fff;font-weight:500;font-size:12.5px;letter-spacing:.01em}
-.state .n{display:inline-flex;align-items:center;height:26px;padding:0 11px;border:1px solid var(--line);color:var(--text-mid);font-size:12.5px}
+.state .y,.state .n{display:inline-flex;align-items:center;height:26px;padding:0 11px;background:#F1E3CF;color:#7A4A2A;font-weight:500;font-size:12.5px;letter-spacing:.01em}
 .more{justify-self:start;margin-top:8px;font-size:13px;border-bottom:1px solid var(--text);padding-bottom:1px}
 
 /* facility preview */
@@ -636,7 +635,7 @@ footer{margin-top:120px;background:#2b2a29;color:#bdbab6;font-size:13px}
       <div class="room-meta">
         <p class="tagline">따뜻한 일상이 시작되는</p>
         <div class="head"><h3>하슬라<small>HASEULLA</small></h3></div>
-        <p class="desc"><span class="mean">해와 밝음을 뜻하는 강릉의 옛 지명이에요</span><br>두 분이 함께 쓰며 서로의 일상과 쉼을 나눌 수 있는 방이에요</p>
+        <p class="desc"><span class="mean">해와 밝음을 뜻하는 강릉의 옛 지명이에요</span><br>일행 또는 다른 분과 방을 함께 쓰며 일상과 쉼을 나눌 수 있는 방이에요</p>
         
         <p class="state" data-room="haseulla"></p>
         <a class="more" href="haseulla/">자세히 보기</a>
@@ -697,7 +696,6 @@ footer{margin-top:120px;background:#2b2a29;color:#bdbab6;font-size:13px}
             <div><dt>기타</dt><dd>필요 시 24인치 사무용 모니터를 대여해 드려요</dd></div>
           </dl>
           <p class="cost-note">공과금의 경우 평균 사용량을 크게 넘을 때만 초과분을 따로 안내해 드려요<br>내 집처럼 사용해 주시면 초과되지 않아요 :)</p>
-          <a class="line-btn cost-cta" data-kakao="" target="_blank" rel="noopener" href="https://open.kakao.com/me/Lowca">카카오톡으로 임대료 문의하기</a>
         </div>
         <div class="guide-col">
           <h3>생활 안내</h3>
@@ -970,7 +968,7 @@ const ROOMS = [
     items: ["침대", "책상", "수납장", "벽걸이 냉난방기"], size: "", rent: "" },
   { id: "haseulla", name: "하슬라", en: "HASEULLA", type: "2인 셰어룸", tagline: "따뜻한 일상이 시작되는",
     card: "해와 밝음을 뜻하는 강릉의 옛 지명이에요",
-    desc: "두 분이 함께 쓰며 서로의 일상과 쉼을 나눌 수 있는 방이에요",
+    desc: "일행 또는 다른 분과 방을 함께 쓰며 일상과 쉼을 나눌 수 있는 방이에요",
     summary: "‘하슬라’는 해와 밝음을 뜻하는 강릉의 옛 지명이에요<br>두 분이 함께 쓰는 셰어룸이라<br>서로의 일상과 쉼을 나누며 지낼 수 있어요",
     items: ["침대 2개", "책상 2개", "수납장", "벽걸이 냉난방기"], size: "", rent: "",
     rentNote: "1인 기준으로 받고, 일행과 함께 계약하시면 할인해 드려요<br>정확한 금액은 따로 문의해 주세요",
