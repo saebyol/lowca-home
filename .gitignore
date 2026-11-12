@@ -1,0 +1,11 @@
+# 홈페이지에 필요 없는 작업 파일
+*.zip
+picker/
+build/*
+!build/src.html
+!build/build.py
+!build/prerender.py
+!build/faq.json
+!build/photos.json
+__pycache__/
+.DS_Store
