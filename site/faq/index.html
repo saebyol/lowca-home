@@ -140,7 +140,7 @@ a.photo:hover img,a:hover > .photo img{transform:scale(1.03)}
 .room-meta .desc .mean{color:var(--text)}
 .room-meta .card-note{justify-self:start;font-size:12.5px;color:var(--point);border:1px solid currentColor;padding:2px 10px;margin-top:2px}
 .state{font-size:13px;display:flex;flex-wrap:wrap;gap:4px 16px}
-.state .y,.state .n{display:inline-flex;align-items:center;height:26px;padding:0 11px;background:transparent;border:1px solid #D2A57E;color:#8A5A36;font-weight:500;font-size:12.5px;letter-spacing:.01em}
+.state .y,.state .n{display:inline-flex;align-items:center;height:26px;padding:0 11px;background:transparent;border:1px solid #A8714B;color:#7A4A2A;white-space:nowrap;font-weight:500;font-size:12.5px;letter-spacing:.01em}
 .more{justify-self:start;margin-top:8px;font-size:13px;border-bottom:1px solid var(--text);padding-bottom:1px}
 
 /* facility preview */
@@ -234,7 +234,9 @@ a.photo:hover img,a:hover > .photo img{transform:scale(1.03)}
 .check-lead{text-align:center;color:var(--text-mid);font-size:14px;line-height:1.85;margin-bottom:24px}
 .check-dates{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 10px;padding-bottom:24px;border-bottom:1px solid var(--text)}
 .check-dates label{font-size:13px;color:var(--text-mid)}
-.check-dates .row-break{flex-basis:100%;height:0}
+.check-dates .row-break{display:none}
+@media (min-width:1101px){.check-box{margin-inline:-60px}.check-dates{flex-wrap:nowrap;gap:8px}.check-dates input{width:148px;padding:0 10px}.check-dates select{padding:0 6px}}
+@media (max-width:1100px) and (min-width:641px){.check-dates .row-break{display:block;flex-basis:100%;height:0}}
 .check-dates select{height:44px;padding:0 10px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:400 14px var(--ko);border-radius:0}
 .check-dates input{height:44px;padding:0 12px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:400 14px var(--ko);border-radius:0;width:170px;max-width:100%}
 .check-dates input:focus{outline:none;border-color:var(--text)}
@@ -714,7 +716,7 @@ p{text-wrap:pretty}
           <h3>비용</h3>
           <dl class="spec">
             <div><dt>보증금</dt><dd>10~30만 원</dd></div>
-            <div><dt>임대료</dt><dd><b class="rent">한 달 기준 약 40~65만 원</b><small>예시 금액이에요</small><br>지내시는 기간에 따라 임대료를 인하해 드려요<br>정확한 금액은 따로 문의해 주세요</dd></div>
+            <div><dt>임대료</dt><dd><b class="rent">한 달 기준 약 40~65만 원</b><small>예시 금액이에요</small><br>지내시는 기간에 따라 임대료를 인하해 드려요<br>주 단위 임대료 및 장기 이용 관련 정확한 임대료는 따로 문의해 주세요</dd></div>
             <div><dt>임대료 포함 항목</dt><dd>공과금(전기·수도·난방), 관리비,<br>인터넷, 공용 비품(휴지, 세제류 등),<br>공용 복합기(출력, 스캔, 복사 등) 사용</dd></div>
             <div><dt>기타</dt><dd>필요 시 24인치 사무용 모니터를 대여해 드려요</dd></div>
           </dl>
