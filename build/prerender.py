@@ -6,7 +6,7 @@ import pathlib, re, subprocess, sys, time, socket
 from playwright.sync_api import sync_playwright
 
 SITE = pathlib.Path(__file__).resolve().parent.parent / 'site'
-PAGES = ['', 'jeumeu/', 'sinami/', 'yunseul/', 'haseulla/', 'facilities/', 'faq/']
+PAGES = ['', 'jeumeu/', 'sinami/', 'yunseul/', 'haseulla/', 'facilities/', 'short-term/', 'hospital/', 'business/', 'monthly/', 'faq/']
 
 CLEAN = r"""(title) => {
   const active = [...document.querySelectorAll('[data-view]')].find((v) => !v.hidden);

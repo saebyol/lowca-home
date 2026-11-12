@@ -21,6 +21,7 @@ faq_full = '\n'.join(
     f'<div class="faq-list">{"".join(faq_item(x) for x in c["items"])}</div></div>' for c in faq['cats'])
 faq_home = ''.join(faq_item(x) for c in faq['cats'] for x in c['items'] if x.get('home'))
 src = src.replace('<!--@FAQ_FULL-->', faq_full).replace('<!--@FAQ_HOME-->', faq_home)
+src = src.replace('/*@FAQ*/{}', json.dumps(faq, ensure_ascii=False, separators=(',',':')))
 def plain(t): return re.sub(r'\s+', ' ', html.unescape(re.sub(r'<br\s*/?>', ' ', re.sub(r'<(?!br)[^>]+>', '', t)))).strip()
 faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
     {"@type": "Question", "name": x['q'], "acceptedAnswer": {"@type": "Answer", "text": plain(x['a'])}}
@@ -46,7 +47,7 @@ biz = {"@context": "https://schema.org", "@type": "LocalBusiness", "@id": SITE_U
  "sameAs": ["https://blog.naver.com/lowca_sharehouse", "https://www.instagram.com/lowca_house/", "https://map.naver.com/p/entry/place/1327156673"]}
 del biz["address"]["postalCode"]
 
-KEYWORDS = "강릉 쉐어하우스, 강릉 셰어하우스, 강릉 한달살기, 강릉 일주일 살기, 강릉 단기임대, 강릉 단기 원룸, 강릉 한달살기 숙소, 강릉 병원 실습 숙소, 강릉아산병원 실습, 강릉역 쉐어하우스, 강릉 워케이션, 강릉 출장, 교동 쉐어하우스, 로우카"
+KEYWORDS = "강릉 단기임대, 강릉 달방, 강릉 한달살기, 강릉 한 달 살기, 강릉 일주일살기, 강릉 일주일 살기, 강릉 쉐어하우스, 강릉 셰어하우스, 강릉 병원 실습, 강릉 병원 실습 숙소, 강릉아산병원 실습, 강릉의료원 실습, 강릉 출장, 강릉 출장 숙소, 강릉 단기 원룸, 강릉 월세 단기, 강릉 한달살기 숙소, 강릉역 쉐어하우스, 강릉 워케이션, 교동 쉐어하우스, 로우카"
 
 # (폴더, data-start, 제목, 설명, 대표 사진)
 PAGES = [
@@ -62,6 +63,14 @@ PAGES = [
   '강릉역 도보 5분 쉐어하우스 로우카의 2인 셰어룸 하슬라 · 임대료는 1인 기준, 일행과 함께 계약하면 할인 · 같은 성별의 입주자와 함께 쓰는 방 · 방 사진과 입주 가능일을 확인해 보세요', 'haseulla-1.jpg'),
  ('facilities', 'facilities', '공용 공간 · 강릉 쉐어하우스 로우카 | 거실 · 주방 · 세탁실 · 옥상정원',
   '강릉 쉐어하우스 로우카의 공용 거실, 주방, 남녀 분리 화장실·샤워실, 세탁기와 건조기가 있는 세탁실, 옥상정원 사진을 둘러보세요 · 공용 공간은 주 1회 정기 청소', 'living-1.jpg'),
+ ('short-term', 'for-short-term', '강릉 단기임대 · 달방 · 단기 원룸 찾는다면 | 로우카 쉐어하우스',
+  '강릉 단기임대, 달방, 단기 원룸을 찾는다면 강릉역 도보 5분 쉐어하우스 로우카 · 6박부터 6개월까지 계약 · 보증금 10~30만 원 · 공과금·관리비·인터넷 포함 · 월 단위 납부', 'jeumeu-1.jpg'),
+ ('hospital', 'for-hospital', '강릉 병원 실습 단기임대 · 강릉아산병원 · 강릉의료원 실습 기간 방 | 로우카',
+  '강릉아산병원, 강릉의료원, 강릉동인병원 실습·연수 기간에 지낼 방 · 병원까지 차로 5~15분 · 실습 일정에 맞춰 6박부터 계약 · 1인실 개별 도어락 · 공과금·인터넷 포함', 'yunseul-1.jpg'),
+ ('business', 'for-business', '강릉 출장 · 교육 단기임대 | KTX 강릉역 도보 5분 쉐어하우스 로우카',
+  '강릉 출장·교육 기간에 지낼 곳 · KTX 강릉역 도보 5분 · 와이파이, 방마다 책상, 복합기, 모니터 대여 · 강릉시청 차로 8분, 강릉과학산업단지 15분 · 6박부터 계약', 'living-1.jpg'),
+ ('monthly', 'for-monthly', '강릉 한달살기 · 일주일살기 쉐어하우스 | 강릉역 도보 5분 로우카',
+  '강릉 한 달 살기, 일주일 살기를 계획한다면 · 월화거리 도보 5분, 바다까지 차로 15분 · 공용 주방과 옥상정원 · 6박부터 6개월까지 · 공과금·인터넷 포함', 'rooftop-2.jpg'),
  ('faq', 'faq', '자주 묻는 질문 · 강릉 쉐어하우스 로우카 | 한달살기 · 병원 실습 · 단기임대',
   '강릉 쉐어하우스 로우카 입주 전 자주 묻는 질문 · 임대료와 보증금, 포함 항목, 준비물, 보안, 강릉아산병원 실습과 출장, 차 없이 지내기까지 한 번에 확인해 보세요', 'kitchen-1.jpg'),
 ]
@@ -73,6 +82,7 @@ def link(t, start, rootp):
     if t == 'facilities': return rootp + 'facilities/'
     if t.startswith('fac-'): return ('#' + t) if start == 'facilities' else rootp + 'facilities/#' + t
     if t == 'faq': return rootp + 'faq/'
+    if t.startswith('for-'): return rootp + t[4:] + '/'
     if t == 'home': return rootp if start else '#home'
     return (rootp if start else '') + '#' + t
 
