@@ -37,7 +37,7 @@ config_js = '/* 로우카 홈페이지 설정 이 파일만 고치면 모든 페
 body_site = body.replace(cfg.group(0), '')
 
 biz = {"@context": "https://schema.org", "@type": "LocalBusiness", "@id": SITE_URL + "#lowca",
- "name": "로우카 쉐어하우스", "alternateName": ["LOWCA Sharehouse", "로우카 셰어하우스", "강릉 로우카"],
+ "name": "로우카 쉐어하우스", "logo": SITE_URL + "favicon-192.png", "alternateName": ["LOWCA Sharehouse", "로우카 셰어하우스", "강릉 로우카"],
  "description": "강릉역 도보 5분, 교동 건물 꼭대기층을 리모델링한 주거형 단기 임대 쉐어하우스예요. 1인실 3개와 2인 셰어룸 1개, 최소 6박부터 최대 6개월까지 지낼 수 있어요.",
  "url": SITE_URL, "telephone": "+82-507-1489-0869",
  "image": [SITE_URL + "images/" + f for f in ["og-home.jpg", "og-jeumeu.jpg", "og-sinami.jpg", "og-yunseul.jpg", "og-haseulla.jpg", "og-monthly.jpg"]],
@@ -119,6 +119,9 @@ def page(folder, start, title, desc, ogimg, ogalt):
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 ''' + ''.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>\n' for x in lds)
     h = head.replace('<title>로우카 쉐어하우스</title>', f'<title>{html.escape(title)}</title>\n' + seo)
