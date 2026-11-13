@@ -310,6 +310,7 @@ a.photo:hover img,a:hover > .photo img{transform:scale(1.03)}
 .collage a{position:relative;display:block;overflow:hidden;background:var(--photo)}
 .collage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .collage a:hover img{transform:scale(1.04)}
+.collage.n5{grid-template-areas:"a a b b" "a a c d" "e e c d"}
 .ct-a{grid-area:a}.ct-b{grid-area:b}.ct-c{grid-area:c}.ct-d{grid-area:d}.ct-e{grid-area:e}.ct-f{grid-area:f}
 
 /* plan */
@@ -424,6 +425,7 @@ footer{margin-top:120px;background:#2b2a29;color:#bdbab6;font-size:13px}
   .title .en{font-size:22px}
   .room-grid{grid-template-columns:minmax(0,1fr);gap:40px}
   .collage{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:120px;gap:6px;grid-template-areas:"a a" "a a" "b b" "c d" "c f" "e e"}
+  .collage.n5{grid-template-areas:"a a" "a a" "b b" "c d" "c d" "e e"}
   .about-body{gap:28px}
   .m-a{grid-column:1/-1}
   .quote{font-size:15px}
@@ -1039,6 +1041,7 @@ function renderHome() {
   // 공용 공간 콜라주: 분위기가 좋은 사진을 크게, 먼저 보여 줘요. 각 사진을 누르면 그 공간 사진으로 이동해요.
   // 사진 고르기 화면의 '공용 공간 콜라주' 6장 (1번부터 a~f 칸)
   const COLLAGE = (PHOTOS.collage || []).slice(0, 6).map((p, i) => ["abcdef"[i], p[3] || "etc", p[0]]);
+  $("#facGrid").classList.toggle("n5", COLLAGE.length === 5);  // 5장이면 4번 사진이 세로로 두 칸
   $("#facGrid").innerHTML = COLLAGE.map(([area, key, file]) => {
     const f = FACILITIES.find((x) => x.key === key);
     return `<a class="ct-${area}" href="${link("fac-" + key)}" aria-label="${f.name} 사진 더 보기"><img src="${img(file)}" alt="강릉 쉐어하우스 로우카 ${f.name}" loading="lazy"></a>`;

@@ -36,6 +36,43 @@
    "bath-6.jpg",
    1067,
    1600
+  ],
+  [
+   "bath-7.jpg",
+   1200,
+   1600
+  ]
+ ],
+ "collage": [
+  [
+   "collage-1.jpg",
+   1600,
+   1067,
+   "living"
+  ],
+  [
+   "collage-2.jpg",
+   1600,
+   1067,
+   "rooftop"
+  ],
+  [
+   "collage-3.jpg",
+   1067,
+   1600,
+   "etc"
+  ],
+  [
+   "collage-4.jpg",
+   1067,
+   1600,
+   "rooftop"
+  ],
+  [
+   "collage-5.jpg",
+   1600,
+   1067,
+   "rooftop"
   ]
  ],
  "etc": [
@@ -142,8 +179,8 @@
   ],
   [
    "jeumeu-5.jpg",
-   1067,
-   1600
+   1600,
+   1067
   ],
   [
    "jeumeu-6.jpg",
@@ -152,11 +189,6 @@
   ],
   [
    "jeumeu-7.jpg",
-   1600,
-   1067
-  ],
-  [
-   "jeumeu-8.jpg",
    1067,
    1600
   ]
@@ -331,44 +363,6 @@
    "yunseul-7.jpg",
    1600,
    1067
-  ]
- ],
- "collage": [
-  [
-   "collage-1.jpg",
-   1600,
-   1067,
-   "living"
-  ],
-  [
-   "collage-2.jpg",
-   1600,
-   1200,
-   "kitchen"
-  ],
-  [
-   "collage-3.jpg",
-   1067,
-   1600,
-   "etc"
-  ],
-  [
-   "collage-4.jpg",
-   1200,
-   1600,
-   "kitchen"
-  ],
-  [
-   "collage-5.jpg",
-   1600,
-   1067,
-   "rooftop"
-  ],
-  [
-   "collage-6.jpg",
-   1600,
-   1200,
-   "etc"
   ]
  ]
 }
