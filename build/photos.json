@@ -1,16 +1,122 @@
 {
+ "about": [
+  [
+   "about-1.jpg",
+   1600,
+   1067
+  ]
+ ],
+ "bath": [
+  [
+   "bath-1.jpg",
+   1067,
+   1600
+  ],
+  [
+   "bath-2.jpg",
+   1600,
+   1067
+  ],
+  [
+   "bath-3.jpg",
+   1067,
+   1600
+  ],
+  [
+   "bath-4.jpg",
+   1600,
+   1067
+  ],
+  [
+   "bath-5.jpg",
+   1600,
+   1067
+  ],
+  [
+   "bath-6.jpg",
+   1067,
+   1600
+  ]
+ ],
+ "etc": [
+  [
+   "etc-1.jpg",
+   1067,
+   1600
+  ],
+  [
+   "etc-2.jpg",
+   1600,
+   1200
+  ],
+  [
+   "etc-3.jpg",
+   1200,
+   1600
+  ],
+  [
+   "etc-4.jpg",
+   1067,
+   1600
+  ]
+ ],
+ "haseulla": [
+  [
+   "haseulla-1.jpg",
+   1067,
+   1600
+  ],
+  [
+   "haseulla-2.jpg",
+   1067,
+   1600
+  ],
+  [
+   "haseulla-3.jpg",
+   1067,
+   1600
+  ],
+  [
+   "haseulla-4.jpg",
+   1067,
+   1600
+  ],
+  [
+   "haseulla-5.jpg",
+   1600,
+   1200
+  ],
+  [
+   "haseulla-6.jpg",
+   1600,
+   1200
+  ],
+  [
+   "haseulla-7.jpg",
+   1200,
+   1600
+  ],
+  [
+   "haseulla-8.jpg",
+   1067,
+   1600
+  ],
+  [
+   "haseulla-9.jpg",
+   1600,
+   1067
+  ],
+  [
+   "haseulla-10.jpg",
+   1200,
+   1600
+  ]
+ ],
  "hero": [
   [
    "hero.jpg",
    2000,
    1333
-  ]
- ],
- "about": [
-  [
-   "about-1.jpg",
-   1067,
-   1600
   ]
  ],
  "jeumeu": [
@@ -53,6 +159,114 @@
    "jeumeu-8.jpg",
    1067,
    1600
+  ]
+ ],
+ "kitchen": [
+  [
+   "kitchen-1.jpg",
+   1600,
+   1200
+  ],
+  [
+   "kitchen-2.jpg",
+   1600,
+   1200
+  ],
+  [
+   "kitchen-3.jpg",
+   1600,
+   900
+  ],
+  [
+   "kitchen-4.jpg",
+   1200,
+   1600
+  ],
+  [
+   "kitchen-5.jpg",
+   900,
+   1600
+  ]
+ ],
+ "laundry": [
+  [
+   "laundry-1.jpg",
+   1600,
+   1200
+  ]
+ ],
+ "living": [
+  [
+   "living-1.jpg",
+   1600,
+   1067
+  ],
+  [
+   "living-2.jpg",
+   1600,
+   1067
+  ],
+  [
+   "living-3.jpg",
+   1600,
+   1067
+  ],
+  [
+   "living-4.jpg",
+   1600,
+   1067
+  ],
+  [
+   "living-5.jpg",
+   1067,
+   1600
+  ],
+  [
+   "living-6.jpg",
+   1200,
+   1600
+  ]
+ ],
+ "rooftop": [
+  [
+   "rooftop-1.jpg",
+   1600,
+   1067
+  ],
+  [
+   "rooftop-2.jpg",
+   1067,
+   1600
+  ],
+  [
+   "rooftop-3.jpg",
+   1067,
+   1600
+  ],
+  [
+   "rooftop-4.jpg",
+   1067,
+   1600
+  ],
+  [
+   "rooftop-5.jpg",
+   1067,
+   1600
+  ],
+  [
+   "rooftop-6.jpg",
+   1067,
+   1600
+  ],
+  [
+   "rooftop-7.jpg",
+   1200,
+   1600
+  ],
+  [
+   "rooftop-8.jpg",
+   1600,
+   1067
   ]
  ],
  "sinami": [
@@ -119,213 +333,42 @@
    1067
   ]
  ],
- "haseulla": [
+ "collage": [
   [
-   "haseulla-1.jpg",
-   1067,
-   1600
-  ],
-  [
-   "haseulla-2.jpg",
-   1067,
-   1600
-  ],
-  [
-   "haseulla-3.jpg",
-   1067,
-   1600
-  ],
-  [
-   "haseulla-4.jpg",
+   "collage-1.jpg",
    1600,
-   1200
+   1067,
+   "living"
   ],
   [
-   "haseulla-5.jpg",
+   "collage-2.jpg",
    1600,
-   1200
-  ],
-  [
-   "haseulla-6.jpg",
    1200,
-   1600
+   "kitchen"
   ],
   [
-   "haseulla-7.jpg",
+   "collage-3.jpg",
    1067,
-   1600
-  ],
-  [
-   "haseulla-8.jpg",
    1600,
-   1067
+   "etc"
   ],
   [
-   "haseulla-9.jpg",
+   "collage-4.jpg",
    1200,
-   1600
-  ]
- ],
- "living": [
-  [
-   "living-1.jpg",
    1600,
-   1067
+   "kitchen"
   ],
   [
-   "living-2.jpg",
+   "collage-5.jpg",
    1600,
-   1067
-  ],
-  [
-   "living-3.jpg",
-   1600,
-   1067
-  ],
-  [
-   "living-4.jpg",
-   1600,
-   1067
-  ],
-  [
-   "living-5.jpg",
    1067,
-   1600
+   "rooftop"
   ],
   [
-   "living-6.jpg",
+   "collage-6.jpg",
+   1600,
    1200,
-   1600
-  ]
- ],
- "kitchen": [
-  [
-   "kitchen-1.jpg",
-   1600,
-   1200
-  ],
-  [
-   "kitchen-2.jpg",
-   1600,
-   1200
-  ],
-  [
-   "kitchen-3.jpg",
-   1600,
-   900
-  ],
-  [
-   "kitchen-4.jpg",
-   1200,
-   1600
-  ],
-  [
-   "kitchen-5.jpg",
-   900,
-   1600
-  ]
- ],
- "bath": [
-  [
-   "bath-1.jpg",
-   1067,
-   1600
-  ],
-  [
-   "bath-2.jpg",
-   1600,
-   1067
-  ],
-  [
-   "bath-3.jpg",
-   1067,
-   1600
-  ],
-  [
-   "bath-4.jpg",
-   1600,
-   1067
-  ],
-  [
-   "bath-5.jpg",
-   1600,
-   1067
-  ],
-  [
-   "bath-6.jpg",
-   1067,
-   1600
-  ]
- ],
- "laundry": [
-  [
-   "laundry-1.jpg",
-   1600,
-   1200
-  ]
- ],
- "rooftop": [
-  [
-   "rooftop-1.jpg",
-   1600,
-   1067
-  ],
-  [
-   "rooftop-2.jpg",
-   1600,
-   1067
-  ],
-  [
-   "rooftop-3.jpg",
-   1067,
-   1600
-  ],
-  [
-   "rooftop-4.jpg",
-   1067,
-   1600
-  ],
-  [
-   "rooftop-5.jpg",
-   1067,
-   1600
-  ],
-  [
-   "rooftop-6.jpg",
-   1067,
-   1600
-  ],
-  [
-   "rooftop-7.jpg",
-   1067,
-   1600
-  ],
-  [
-   "rooftop-8.jpg",
-   1200,
-   1600
-  ]
- ],
- "etc": [
-  [
-   "etc-1.jpg",
-   1067,
-   1600
-  ],
-  [
-   "etc-2.jpg",
-   1600,
-   1200
-  ],
-  [
-   "etc-3.jpg",
-   1200,
-   1600
-  ],
-  [
-   "etc-4.jpg",
-   1067,
-   1600
+   "etc"
   ]
  ]
 }

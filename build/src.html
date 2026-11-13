@@ -1035,7 +1035,8 @@ function renderHome() {
       </div>
     </article>`).join("");
   // 공용 공간 콜라주: 분위기가 좋은 사진을 크게, 먼저 보여 줘요. 각 사진을 누르면 그 공간 사진으로 이동해요.
-  const COLLAGE = [["a", "living", "living-1.jpg"], ["b", "kitchen", "kitchen-1.jpg"], ["c", "etc", "etc-1.jpg"], ["d", "kitchen", "kitchen-4.jpg"], ["e", "rooftop", "rooftop-2.jpg"], ["f", "etc", "etc-2.jpg"]];
+  // 사진 고르기 화면의 '공용 공간 콜라주' 6장 (1번부터 a~f 칸)
+  const COLLAGE = (PHOTOS.collage || []).slice(0, 6).map((p, i) => ["abcdef"[i], p[3] || "etc", p[0]]);
   $("#facGrid").innerHTML = COLLAGE.map(([area, key, file]) => {
     const f = FACILITIES.find((x) => x.key === key);
     return `<a class="ct-${area}" href="${link("fac-" + key)}" aria-label="${f.name} 사진 더 보기"><img src="${img(file)}" alt="강릉 쉐어하우스 로우카 ${f.name}" loading="lazy"></a>`;
