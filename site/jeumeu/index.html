@@ -22,6 +22,14 @@
 <meta name="twitter:image" content="https://lowca.pages.dev/images/og-jeumeu.jpg">
 <link rel="image_src" href="https://lowca.pages.dev/images/og-jeumeu.jpg">
 <meta name="theme-color" content="#ffffff">
+<script>/* ?notrack=1 로 한 번 들어오면 이 브라우저는 방문 통계에서 빠져요 (?notrack=0 이면 다시 포함) */
+try{var q=location.search,k="lowca_notrack",m="";
+if(/[?&]notrack=1/.test(q)){localStorage.setItem(k,"1");m="이 브라우저는 이제 방문 통계에서 제외돼요";}
+if(/[?&]notrack=0/.test(q)){localStorage.removeItem(k);m="이 브라우저도 다시 방문 통계에 포함돼요";}
+if(localStorage.getItem(k))window["ga-disable-G-FPXVGSQXRM"]=true;
+if(m)addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.textContent=m;
+d.style.cssText="position:fixed;left:50%;top:20px;transform:translateX(-50%);z-index:9999;background:#3a2a1e;color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.2)";
+document.body.appendChild(d);setTimeout(function(){d.remove()},4000);});}catch(e){}</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-FPXVGSQXRM"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-FPXVGSQXRM");</script>
 <link rel="icon" href="/favicon.ico" sizes="any">
