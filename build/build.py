@@ -10,7 +10,8 @@ photos = json.loads((root/'build/photos.json').read_text())
 faq = json.loads((root/'build/faq.json').read_text(encoding='utf-8'))
 src = src.replace('/*@PHOTOS*/{}', json.dumps(photos, separators=(',',':')))
 
-SITE_URL = 'https://lowca.pages.dev/'  # 실제 주소가 정해지면 바꾸기 (끝에 / 포함)
+SITE_URL = 'https://lowca.pages.dev/'
+GA_ID = 'G-FPXVGSQXRM'  # 구글 애널리틱스 측정 ID  # 실제 주소가 정해지면 바꾸기 (끝에 / 포함)
 
 # ---------- FAQ ----------
 def faq_item(x):
@@ -117,6 +118,8 @@ def page(folder, start, title, desc, ogimg, ogalt):
 <meta name="twitter:image" content="{img_url}">
 <link rel="image_src" href="{img_url}">
 <meta name="theme-color" content="#ffffff">
+<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag("js",new Date());gtag("config","{GA_ID}");</script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">

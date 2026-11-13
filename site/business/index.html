@@ -22,6 +22,8 @@
 <meta name="twitter:image" content="https://lowca.pages.dev/images/og-business.jpg">
 <link rel="image_src" href="https://lowca.pages.dev/images/og-business.jpg">
 <meta name="theme-color" content="#ffffff">
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-FPXVGSQXRM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-FPXVGSQXRM");</script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
@@ -422,6 +424,7 @@ footer{margin-top:120px;background:#2b2a29;color:#bdbab6;font-size:13px}
 .f-bot dl{display:flex;flex-wrap:wrap;gap:2px 18px;margin:0}
 .f-bot dl div{display:flex;gap:6px}
 .f-bot dd{margin:0}
+.f-privacy{font-size:11.5px;color:#8d8a86;word-break:keep-all}
 .f-guide{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:#bdbab6}
 .f-bot .sns{display:flex;gap:16px;font-family:var(--en);letter-spacing:.1em;color:#bdbab6}
 
@@ -970,6 +973,7 @@ p{text-wrap:pretty}
         <div><dt>사업자등록번호</dt><dd>361-38-01528</dd></div>
         <div><dt>통신판매업신고번호</dt><dd>제2025-강원강릉0197호</dd></div>
       </dl>
+      <p class="f-privacy">이 홈페이지는 방문 통계를 위해 구글 애널리틱스 쿠키를 사용해요<br>이름이나 연락처 같은 개인정보는 수집하지 않아요</p>
       <p>© LOWCA Sharehouse</p>
     </div>
   </div>
@@ -1504,6 +1508,26 @@ function renderStay(key) {
     </div>
   </section>`;
 }
+
+
+/* ---------- 문의 버튼 클릭 통계 (구글 애널리틱스) ---------- */
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("a, button");
+  if (!a || typeof window.gtag !== "function") return;
+  const PLACES = [["#fab", "floating"], [".hero", "hero"], [".picked-go", "calendar"], [".avail-wait", "availability"],
+    ["#kakaoBox", "check"], [".faq-cta", "faq_bottom"], ["header", "header"], ["footer", "footer"]];
+  const hit = PLACES.find(([sel]) => a.closest(sel));
+  const sec = a.closest("section[id], [id^=view-]");
+  const where = hit ? hit[1] : (sec && sec.id) || "page";
+  const href = a.getAttribute("href") || "";
+  const send = (name, extra = {}) => window.gtag("event", name, { click_location: where, page_path: location.pathname, ...extra });
+  if (a.matches("[data-kakao]")) send("kakao_click");
+  else if (href.startsWith("tel:")) send("phone_click");
+  else if (a.id === "copyPhone") send("phone_copy");
+  else if (a.id === "copyMsg") send("inquiry_copy", { room: [...wanted][0] || "상담 후 결정" });
+  else if (a.id === "pickGo") send("date_inquiry");
+  else if (/#availability$/.test(href)) send("availability_click");
+}, true);
 
 /* ---------- 시작 ---------- */
 function boot(list) { setBookings(list); renderStates(); renderCal(); renderPicked(); renderCheck(); if (currentRoom) renderRoom(currentRoom); }

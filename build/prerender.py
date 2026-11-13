@@ -49,6 +49,8 @@ try:
             pg = b.new_page(viewport={'width': 1280, 'height': 900})
             errs = []
             pg.on('pageerror', lambda e: errs.append(str(e)))
+            # 미리 저장하는 동안에는 방문 통계로 잡히지 않게 막아요
+            pg.route(re.compile(r'googletagmanager|google-analytics'), lambda r: r.abort())
             pg.goto(f'http://127.0.0.1:{port}/{p}', wait_until='networkidle')
             pg.wait_for_timeout(300)
             if errs: sys.exit(f'{p}: {errs}')
