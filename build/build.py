@@ -39,40 +39,44 @@ body_site = body.replace(cfg.group(0), '')
 biz = {"@context": "https://schema.org", "@type": "LocalBusiness", "@id": SITE_URL + "#lowca",
  "name": "로우카 쉐어하우스", "alternateName": ["LOWCA Sharehouse", "로우카 셰어하우스", "강릉 로우카"],
  "description": "강릉역 도보 5분, 교동 건물 꼭대기층을 리모델링한 주거형 단기 임대 쉐어하우스예요. 1인실 3개와 2인 셰어룸 1개, 최소 6박부터 최대 6개월까지 지낼 수 있어요.",
- "url": SITE_URL, "telephone": "+82-507-1489-0869", "image": SITE_URL + "images/og.jpg",
+ "url": SITE_URL, "telephone": "+82-507-1489-0869",
+ "image": [SITE_URL + "images/" + f for f in ["og-home.jpg", "og-jeumeu.jpg", "og-sinami.jpg", "og-yunseul.jpg", "og-haseulla.jpg", "og-monthly.jpg"]],
  "hasMap": "https://map.naver.com/p/entry/place/1327156673",
  "address": {"@type": "PostalAddress", "streetAddress": "강릉대로 250", "addressLocality": "강릉시", "addressRegion": "강원특별자치도", "postalCode": "", "addressCountry": "KR"},
  "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": n, "value": True} for n in
                     ["와이파이", "공용 주방", "세탁기", "건조기", "옥상정원", "방별 도어락", "공용 공간 CCTV", "남녀 분리 화장실"]],
  "sameAs": ["https://blog.naver.com/lowca_sharehouse", "https://www.instagram.com/lowca_house/", "https://map.naver.com/p/entry/place/1327156673"]}
 del biz["address"]["postalCode"]
+# 검색 결과에 'pages.dev' 대신 사이트 이름이 나오도록
+site_ld = {"@context": "https://schema.org", "@type": "WebSite", "@id": SITE_URL + "#website", "name": "로우카 쉐어하우스",
+           "alternateName": ["로우카", "LOWCA", "로우카 셰어하우스"], "url": SITE_URL, "inLanguage": "ko-KR", "publisher": {"@id": SITE_URL + "#lowca"}}
 
 KEYWORDS = "강릉 단기임대, 강릉 달방, 강릉 한달살기, 강릉 한 달 살기, 강릉 일주일살기, 강릉 일주일 살기, 강릉 쉐어하우스, 강릉 셰어하우스, 강릉 병원 실습, 강릉아산병원 실습, 강릉의료원 실습, 강릉 출장, 강릉 단기 원룸, 강릉 월세 단기, 강릉역 쉐어하우스, 강릉 워케이션, 교동 쉐어하우스, 로우카"
 
 # (폴더, data-start, 제목, 설명, 대표 사진)
 PAGES = [
- ('', '', '강릉 한달살기 · 단기임대 쉐어하우스 로우카 | 강릉역 도보 5분',
-  '강릉역 도보 5분 교동 쉐어하우스 로우카 · 1인실 3개와 2인 셰어룸 · 최소 6박부터 최대 6개월 · 일주일 살기, 한 달 살기, 병원 실습, 출장, 워케이션을 위한 주거형 단기 임대 · 공과금과 관리비 포함', 'og.jpg'),
- ('jeumeu', 'room-jeumeu', '즈므 1인실 · 강릉 단기임대 쉐어하우스 로우카',
-  '강릉역 도보 5분 쉐어하우스 로우카의 1인실 즈므 · 노을이 스며드는 창이 있는 혼자만의 방 · 방 사진과 입주 가능일을 확인해 보세요 · 최소 6박부터 최대 6개월', 'jeumeu-1.jpg'),
- ('sinami', 'room-sinami', '시나미 1인실 · 강릉 단기임대 쉐어하우스 로우카',
-  '강릉역 도보 5분 쉐어하우스 로우카의 1인실 시나미 · 부드러운 빛이 드는 조용한 방 · 방 사진과 입주 가능일을 확인해 보세요 · 최소 6박부터 최대 6개월', 'sinami-1.jpg'),
- ('yunseul', 'room-yunseul', '윤슬 1인실 · 강릉 단기임대 쉐어하우스 로우카',
-  '강릉역 도보 5분 쉐어하우스 로우카의 1인실 윤슬 · 차분하고 아늑한 혼자만의 방 · 방 사진과 입주 가능일을 확인해 보세요 · 최소 6박부터 최대 6개월', 'yunseul-1.jpg'),
- ('haseulla', 'room-haseulla', '하슬라 2인 셰어룸 · 강릉 단기임대 쉐어하우스 로우카',
-  '강릉역 도보 5분 쉐어하우스 로우카의 2인 셰어룸 하슬라 · 임대료는 1인 기준, 일행과 함께 계약하면 할인 · 같은 성별의 입주자와 함께 쓰는 방 · 방 사진과 입주 가능일을 확인해 보세요', 'haseulla-1.jpg'),
- ('facilities', 'facilities', '공용 공간 · 강릉 쉐어하우스 로우카 | 거실 · 주방 · 세탁실 · 옥상정원',
-  '강릉 쉐어하우스 로우카의 공용 거실, 주방, 남녀 분리 화장실·샤워실, 세탁기와 건조기가 있는 세탁실, 옥상정원 사진을 둘러보세요 · 공용 공간은 주 1회 정기 청소', 'living-1.jpg'),
- ('short-term', 'for-short-term', '강릉 단기임대 · 한 달 단위 단기 원룸 | 로우카 쉐어하우스',
-  '강릉 단기임대, 한 달 단위 단기 원룸을 찾는다면 강릉역 도보 5분 쉐어하우스 로우카 · 6박부터 6개월까지 계약 · 보증금 10~30만 원 · 공과금·관리비·인터넷 포함 · 월 단위 납부', 'jeumeu-1.jpg'),
- ('hospital', 'for-hospital', '강릉 병원 실습 단기임대 · 강릉아산병원 · 강릉의료원 실습 기간 방 | 로우카',
-  '강릉아산병원, 강릉의료원, 강릉동인병원 실습·연수 기간에 지낼 방 · 병원까지 차로 5~15분 · 실습 일정에 맞춰 6박부터 계약 · 1인실 개별 도어락 · 공과금·인터넷 포함', 'yunseul-1.jpg'),
- ('business', 'for-business', '강릉 출장 · 교육 단기임대 | KTX 강릉역 도보 5분 쉐어하우스 로우카',
-  '강릉 출장·교육 기간에 지낼 곳 · KTX 강릉역 도보 5분 · 와이파이, 방마다 책상, 복합기, 모니터 대여 · 강릉시청 차로 8분, 강릉과학산업단지 15분 · 6박부터 계약', 'living-1.jpg'),
- ('monthly', 'for-monthly', '강릉 한달살기 · 일주일살기 쉐어하우스 | 강릉역 도보 5분 로우카',
-  '강릉 한 달 살기, 일주일 살기를 계획한다면 · 월화거리 도보 5분, 바다까지 차로 15분 · 공용 주방과 옥상정원 · 6박부터 6개월까지 · 공과금·인터넷 포함', 'rooftop-2.jpg'),
- ('faq', 'faq', '자주 묻는 질문 · 강릉 쉐어하우스 로우카 | 한달살기 · 병원 실습 · 단기임대',
-  '강릉 쉐어하우스 로우카 입주 전 자주 묻는 질문 · 임대료와 보증금, 포함 항목, 준비물, 보안, 강릉아산병원 실습과 출장, 차 없이 지내기까지 한 번에 확인해 보세요', 'kitchen-1.jpg'),
+ ('', '', '로우카 쉐어하우스 | 강릉역 도보 5분 한달살기 · 단기임대 쉐어하우스',
+  '강릉역에서 걸어서 5분, 교동에 있는 주거형 단기 임대 쉐어하우스 로우카예요. 1인실 3개와 2인 셰어룸이 있고, 출장·병원 실습·한 달 살기로 6박부터 6개월까지 지내실 수 있어요. 공과금과 관리비, 인터넷이 임대료에 포함되어 있어요.', 'og-home.jpg', '로우카 공용 거실'),
+ ('jeumeu', 'room-jeumeu', '즈므 1인실 | 로우카 쉐어하우스',
+  '해가 저무는 마을이라는 뜻의 1인실 즈므예요. 노을이 예쁘게 드는 창가에서 하루를 조용히 마무리할 수 있어요. 방 사진과 실시간 입주 가능일을 확인해 보세요.', 'og-jeumeu.jpg', '로우카 1인실 즈므'),
+ ('sinami', 'room-sinami', '시나미 1인실 | 로우카 쉐어하우스',
+  '강릉 말로 ‘천천히’라는 뜻의 1인실 시나미예요. 부드러운 빛이 드는 조용한 방이라 느긋하게 쉬고 싶은 분께 잘 맞아요. 방 사진과 실시간 입주 가능일을 확인해 보세요.', 'og-sinami.jpg', '로우카 1인실 시나미'),
+ ('yunseul', 'room-yunseul', '윤슬 1인실 | 로우카 쉐어하우스',
+  '햇빛과 달빛에 반짝이는 물결을 뜻하는 1인실 윤슬이에요. 차분하고 아늑해서 혼자만의 시간을 보내기 좋아요. 방 사진과 실시간 입주 가능일을 확인해 보세요.', 'og-yunseul.jpg', '로우카 1인실 윤슬'),
+ ('haseulla', 'room-haseulla', '하슬라 2인 셰어룸 | 로우카 쉐어하우스',
+  '해와 밝음을 뜻하는 강릉 옛 지명에서 이름을 딴 2인 셰어룸 하슬라예요. 일행과 함께, 또는 같은 성별의 입주자와 방을 나눠 쓸 수 있어요. 방 사진과 실시간 입주 가능일을 확인해 보세요.', 'og-haseulla.jpg', '로우카 2인 셰어룸 하슬라'),
+ ('facilities', 'facilities', '공용 공간 | 로우카 쉐어하우스',
+  '로우카의 공용 거실과 주방, 남녀 화장실·샤워실, 세탁실, 옥상정원을 사진으로 둘러보세요. 공용 공간은 주 1회 정기 청소로 관리하고 있어요.', 'og-facilities.jpg', '로우카 공용 거실'),
+ ('short-term', 'for-short-term', '강릉 단기임대, 한 달 단위로 지낼 방 | 로우카 쉐어하우스',
+  '강릉에서 한 달 단위로 지낼 방을 찾고 계신다면 강릉역 도보 5분 쉐어하우스 로우카를 만나 보세요. 6박부터 6개월까지 계약할 수 있고, 보증금은 10~30만 원, 공과금과 인터넷은 임대료에 포함되어 있어요.', 'og-short-term.jpg', '로우카 1인실'),
+ ('hospital', 'for-hospital', '강릉 병원 실습 기간 지낼 방 | 로우카 쉐어하우스',
+  '강릉아산병원, 강릉의료원, 강릉동인병원 실습이나 연수 기간에 지낼 방을 찾고 계신가요? 병원까지 차로 5~15분, 실습 일정에 맞춰 6박부터 계약할 수 있는 강릉역 앞 쉐어하우스 로우카예요.', 'og-hospital.jpg', '로우카 1인실'),
+ ('business', 'for-business', '강릉 출장 · 교육 기간 지낼 곳 | 로우카 쉐어하우스',
+  'KTX 강릉역에서 걸어서 5분이라 출장과 교육 일정에 잘 맞는 쉐어하우스 로우카예요. 와이파이와 방마다 책상, 공용 복합기가 있고, 강릉시청까지 차로 약 8분이에요.', 'og-business.jpg', '로우카 공용 주방'),
+ ('monthly', 'for-monthly', '강릉 한달살기 · 일주일살기 | 로우카 쉐어하우스',
+  '강릉 일주일 살기, 한 달 살기를 계획하고 계신가요? 월화거리는 걸어서 5분, 바다는 차로 15분 거리의 쉐어하우스 로우카에서 강릉의 일상을 누려 보세요.', 'og-monthly.jpg', '로우카 옥상정원'),
+ ('faq', 'faq', '자주 묻는 질문 | 로우카 쉐어하우스',
+  '로우카 쉐어하우스에 입주하기 전 많이 궁금해하시는 임대료와 보증금, 포함 항목, 준비물, 보안, 병원 실습과 출장 관련 질문을 모았어요.', 'og-faq.jpg', '로우카 공용 주방'),
 ]
 SECTIONS = {'about', 'for-you', 'rooms', 'facility-preview', 'availability', 'guide', 'process', 'faq-preview', 'check', 'location'}
 
@@ -86,12 +90,17 @@ def link(t, start, rootp):
     if t == 'home': return rootp if start else '#home'
     return (rootp if start else '') + '#' + t
 
-def page(folder, start, title, desc, ogimg):
+def page(folder, start, title, desc, ogimg, ogalt):
     rootp = '../' if folder else ''
     url = SITE_URL + (folder + '/' if folder else '')
-    lds = [biz] + ([faq_ld] if start == 'faq' else [])
+    img_url = SITE_URL + 'images/' + ogimg
+    web_ld = {"@context": "https://schema.org", "@type": "WebPage", "@id": url, "url": url, "name": title, "description": desc, "inLanguage": "ko-KR",
+              "isPartOf": {"@id": SITE_URL + "#website"}, "about": {"@id": SITE_URL + "#lowca"},
+              "primaryImageOfPage": {"@type": "ImageObject", "url": img_url, "width": 1200, "height": 630}, "image": img_url}
+    lds = [site_ld, biz, web_ld] + ([faq_ld] if start == 'faq' else [])
     seo = f'''<meta name="description" content="{html.escape(desc)}">
 <meta name="keywords" content="{KEYWORDS}">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="naver-site-verification" content="ac5804994360720ee1ff4a7de1af9a650e8bdc6e">
 <link rel="canonical" href="{url}">
 <meta property="og:type" content="website">
@@ -100,8 +109,13 @@ def page(folder, start, title, desc, ogimg):
 <meta property="og:title" content="{html.escape(title)}">
 <meta property="og:description" content="{html.escape(desc)}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{SITE_URL}images/{ogimg}">
+<meta property="og:image" content="{img_url}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{html.escape(ogalt)}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{img_url}">
+<link rel="image_src" href="{img_url}">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
