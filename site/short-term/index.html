@@ -136,7 +136,8 @@ a.photo:hover img,a:hover > .photo img{transform:scale(1.03)}
 .mosaic a:hover img{transform:scale(1.04)}
 .mosaic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .m-a{grid-column:span 2;grid-row:span 2}.m-b{grid-row:span 2}.m-e,.m-f{grid-column:span 2}
-.quote{margin-top:56px;text-align:center;font-size:17px;line-height:1.9;color:var(--text)}
+.about-text .quote span{white-space:nowrap}
+.about-text .quote{margin-top:12px;font-size:19px;font-weight:600;line-height:1.6;color:var(--text)}
 .about-text{display:grid;gap:16px}
 .about-text h3{font-size:24px;font-weight:500;line-height:1.5;text-wrap:balance}
 .about-text p{color:var(--text-mid)}
@@ -471,8 +472,7 @@ footer{margin-top:120px;background:#2b2a29;color:#bdbab6;font-size:13px}
   .collage.n5{grid-template-areas:"a a" "a a" "b b" "c d" "c d" "e e"}
   .about-body{gap:28px}
   .m-a{grid-column:1/-1}
-  .quote{font-size:15px}
-  .quote br{display:none}
+  .about-text .quote{font-size:17.5px}
   .cal-legend{justify-items:start;text-align:left}
   .fac-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .other-grid{grid-template-columns:minmax(0,1fr)}
@@ -560,8 +560,13 @@ footer{margin-top:120px;background:#2b2a29;color:#bdbab6;font-size:13px}
 @media (max-width:860px){.stay-cols{grid-template-columns:minmax(0,1fr);gap:0}}
 @media (max-width:640px){.stay-photos{grid-template-columns:1fr 1fr;margin-bottom:44px}.stay-photos .photo:first-child{grid-column:1/-1;aspect-ratio:3/2}.stay-h{margin-top:56px}}
 /* 줄바꿈이 한 단어만 남지 않게 균형 있게 */
-.steps p,.trust p,.who-item p,.stay-lead,.spec dd,.room-meta .desc,.check-lead,.kakao-lead,.fac-intro{text-wrap:balance;word-break:keep-all}
+/* 가운데 정렬 글은 줄 길이를 고르게, 왼쪽 정렬 글은 줄을 꽉 채우고 마지막 줄에 한 단어만 남지 않게 */
+.steps p,.stay-lead,.check-lead,.fac-intro,.min-note,.nl-title,.notice-lead p{text-wrap:balance;word-break:keep-all}
+.trust p,.who-item p,.spec dd,.room-meta .desc,.kakao-lead,.long-note,.cost-note,.about-text p{text-wrap:pretty;word-break:keep-all}
 p{text-wrap:pretty}
+.ln{display:block;text-wrap:pretty}
+.about-text p:not(.quote),.info .summary .ln{text-wrap:balance}
+body{word-break:keep-all;overflow-wrap:break-word}
 /* floating cta */
 .fab{position:fixed;right:24px;bottom:24px;z-index:40;display:flex;gap:8px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s}
 .fab.show{opacity:1;transform:none;pointer-events:auto}
@@ -616,13 +621,13 @@ p{text-wrap:pretty}
         <div class="about-body">
           <div class="about-text">
             <h3>강릉에서 잠시, 살아 보는 시간</h3>
-            <p>로우카는 강릉역에서 걸어서 5분 거리,<br>강릉 중심의 건물 꼭대기층에 있는 쉐어하우스예요</p>
-            <p>출장, 병원 실습, 한 달 살기로 강릉에 오신 분들이<br>내 집처럼 편하게 생활하실 수 있는 공간이에요</p>
-            <p>각자의 방에서는 나만의 시간을 보내며,<br>때론 함께 사는 분들과 소소한 일상을 나눠 보세요</p>
+            <p>로우카는 강릉역에서 걸어서 5분 거리, 강릉 중심의 건물 꼭대기층에 있는 쉐어하우스예요</p>
+            <p>출장, 병원 실습, 한 달 살기로 강릉에 오신 분들이 내 집처럼 편하게 생활하실 수 있어요</p>
+            <p>각자의 방에서는 나만의 시간을 보내며, 때론 함께 사는 분들과 소소한 일상을 나눠 보세요</p>
+            <p class="quote"><span>나만의 속도로 살아가는 공간,</span> <span>로우카 쉐어하우스</span></p>
           </div>
         </div>
       </div>
-      <p class="quote">나만의 속도로 살아가는 공간,<br>로우카 쉐어하우스</p>
     </div>
   </section>
 
@@ -635,7 +640,7 @@ p{text-wrap:pretty}
       <div class="room-meta">
         <p class="tagline">따스한 노을이 담긴</p>
         <div class="head"><h3>즈므<small>JEUMEU</small></h3></div>
-        <p class="desc"><span class="mean">해가 저무는 마을이라는 뜻이에요</span><br>노을이 예쁘게 드는 창가에서 하루의 끝을 조용히 정리하기 좋아요</p>
+        <p class="desc"><span class="mean">해가 저무는 마을이라는 뜻이에요</span><br>노을이 예쁘게 드는 창가에서 하루를 조용히 정리하기 좋아요</p>
         
         <p class="state" data-room="jeumeu"></p>
         <a class="more" href="../jeumeu/">자세히 보기</a>
@@ -646,7 +651,7 @@ p{text-wrap:pretty}
       <div class="room-meta">
         <p class="tagline">느긋한 쉼이 있는</p>
         <div class="head"><h3>시나미<small>SINAMI</small></h3></div>
-        <p class="desc"><span class="mean">‘시나미’는 강릉 말로 ‘천천히’라는 뜻이에요</span><br>도심의 빠른 속도에서 벗어나 느긋하게 쉬고 싶은 분께 추천해요</p>
+        <p class="desc"><span class="mean">‘시나미’는 강릉 말로 ‘천천히’라는 뜻이에요</span><br>빠른 일상에서 벗어나 느긋하게 쉬고 싶은 분께 추천해요</p>
         
         <p class="state" data-room="sinami"></p>
         <a class="more" href="../sinami/">자세히 보기</a>
@@ -657,7 +662,7 @@ p{text-wrap:pretty}
       <div class="room-meta">
         <p class="tagline">차분한 일상을 위한</p>
         <div class="head"><h3>윤슬<small>YUNSEUL</small></h3></div>
-        <p class="desc"><span class="mean">햇빛과 달빛에 반짝이는 물결을 뜻해요</span><br>윤슬처럼 차분하고 아늑해서 혼자만의 시간을 보내기 좋은 방이에요</p>
+        <p class="desc"><span class="mean">햇빛과 달빛에 반짝이는 물결을 뜻해요</span><br>윤슬처럼 차분하고 아늑해 혼자만의 시간을 보내기 좋아요</p>
         
         <p class="state" data-room="yunseul"></p>
         <a class="more" href="../yunseul/">자세히 보기</a>
@@ -668,7 +673,7 @@ p{text-wrap:pretty}
       <div class="room-meta">
         <p class="tagline">따뜻한 일상이 시작되는</p>
         <div class="head"><h3>하슬라<small>HASEULLA</small></h3></div>
-        <p class="desc"><span class="mean">해와 밝음을 뜻하는 강릉의 옛 지명이에요</span><br>일행 또는 다른 분과 방을 함께 쓰며 일상과 쉼을 나눌 수 있는 방이에요</p>
+        <p class="desc"><span class="mean">해와 밝음을 뜻하는 강릉의 옛 지명이에요</span><br>일행 또는 다른 분과 함께 쓰며 일상과 쉼을 나누는 방이에요</p>
         
         <p class="state" data-room="haseulla"></p>
         <a class="more" href="../haseulla/">자세히 보기</a>
@@ -692,7 +697,7 @@ p{text-wrap:pretty}
         <div class="who-item"><p class="en">HOSPITAL</p><h3>병원 실습 · 연수</h3><p>강릉아산병원과 강릉의료원까지 차로 5~15분이에요<br>실습 일정에 맞춰 6박부터 계약할 수 있어요</p><a class="who-more" href="../hospital/">자세히 보기</a></div>
         <div class="who-item"><p class="en">BUSINESS</p><h3>출장 · 교육</h3><p>KTX 강릉역에서 걸어서 5분 거리에 위치하여 출장으로 다니기 편리해요</p><a class="who-more" href="../business/">자세히 보기</a></div>
         <div class="who-item"><p class="en">LIVING</p><h3>일주일 · 한 달 살기</h3><p>월화거리는 걸어서 5분, 바다는 차로 15분이면 닿아요<br>강릉의 일상을 가까이에서 느껴 보세요</p><a class="who-more" href="../monthly/">자세히 보기</a></div>
-        <div class="who-item"><p class="en">WORKATION</p><h3>워케이션 · 쉼</h3><p>낮에는 거실에서 일하고,<br>저녁에는 노을 지는 옥상정원에서 하루를 마무리해 보세요</p><a class="who-more" href="../short-term/">자세히 보기</a></div>
+        <div class="who-item"><p class="en">WORKATION</p><h3>워케이션 · 쉼</h3><p>낮에는 거실에서 일하고, 저녁에는 노을 지는 옥상정원에서 하루를 마무리해 보세요</p><a class="who-more" href="../short-term/">자세히 보기</a></div>
       </div>
     </div>
   </section>
@@ -731,16 +736,16 @@ p{text-wrap:pretty}
     <div class="wrap">
       <div class="title"><h2 class="en">GUIDE</h2><p class="ko">입주 전 안내</p></div>
       <div class="notice-lead">
-        <p class="nl-title">로우카는 숙박업소가 아닌,<br class="m-br"> 주거형 단기 임대 공간이에요</p>
-        <p>출장, 병원 실습, 한 달 살기처럼 강릉에서 일정 기간<br>생활하시는 분들이 함께 지내는 공간이에요</p>
+        <p class="nl-title">로우카는 숙박업소가 아닌, 주거형 단기 임대 공간이에요</p>
+        <p>출장, 병원 실습, 한 달 살기로 강릉에서 생활하시는 분들이 함께 지내는 공간이에요</p>
       </div>
       <div class="guide-grid">
         <div class="guide-col">
           <h3>비용</h3>
           <dl class="spec">
-            <div><dt>보증금</dt><dd>10~30만 원</dd></div>
-            <div><dt>임대료</dt><dd><b class="rent">한 달 기준 약 40~65만 원</b><small>예시 금액이에요</small><br>지내시는 기간에 따라 임대료를 인하해 드려요<br>주 단위 임대료 및 장기 이용 관련 정확한 임대료는 따로 문의해 주세요</dd></div>
-            <div><dt>임대료 포함 항목</dt><dd>공과금(전기·수도·난방), 관리비,<br>인터넷, 공용 비품(휴지, 세제류 등),<br>공용 복합기(출력, 스캔, 복사 등) 사용</dd></div>
+            <div><dt>보증금</dt><dd>10~30만&nbsp;원</dd></div>
+            <div><dt>임대료</dt><dd><b class="rent">한 달 기준 약 40~65만&nbsp;원</b><small>예시 금액이에요</small><br>지내시는 기간에 따라 임대료를 인하해 드려요<br>주 단위 임대료 및 장기 이용 관련 정확한 임대료는 따로 문의해 주세요</dd></div>
+            <div><dt>임대료 포함 항목</dt><dd>공과금(전기·수도·난방), 관리비, 인터넷, 공용 비품(휴지, 세제류 등), 공용 복합기(출력, 스캔, 복사 등) 사용</dd></div>
             <div><dt>기타</dt><dd>필요 시 24인치 사무용 모니터를 대여해 드려요</dd></div>
           </dl>
           <p class="cost-note">공과금의 경우 평균 사용량을 크게 넘을 때만 초과분을 따로 안내해 드려요<br>내 집처럼 사용해 주시면 초과되지 않아요 :)</p>
@@ -766,9 +771,9 @@ p{text-wrap:pretty}
       <div class="check-box">
         <p class="check-lead">입주일과 퇴거일을 고르면 그 기간에 입주할 수 있는 방이 보여요<br>마음에 드는 방을 선택한 뒤 카카오톡으로 편하게 문의해 주세요</p>
         <div class="check-dates">
-          <label for="fIn">입주일</label><input type="date" id="fIn" min="2026-11-13">
+          <label for="fIn">입주일</label><input type="date" id="fIn" min="2026-11-15">
           <span class="tilde">~</span>
-          <label for="fOut">퇴거일</label><input type="date" id="fOut" min="2026-11-19">
+          <label for="fOut">퇴거일</label><input type="date" id="fOut" min="2026-11-21">
           <span class="hint" id="nights"></span>
           <span class="row-break" aria-hidden="true"></span>
           <label for="fGender">성별</label><select id="fGender"><option value="">선택</option><option>여성</option><option>남성</option></select>
@@ -839,7 +844,7 @@ p{text-wrap:pretty}
   <section id="faq-preview">
     <div class="wrap">
       <div class="title"><h2 class="en">FAQ</h2><p class="ko">자주 묻는 질문</p></div>
-      <div class="faq-wrap faq-home"><details class="faq-item"><summary>쉐어하우스(셰어하우스)가 처음인데 지내기 괜찮을까요?</summary><div class="a"><p>함께 지내는 공간이지만 각자의 프라이버시는 충분히 지켜져요 <br>방마다 개별 도어락이 있어 방문을 닫으면 온전히 나만의 공간이에요 <br>거실과 주방, 세탁실만 함께 쓰고, 한 집에 최대 5명만 지내서 북적이지 않아요</p></div></details><details class="faq-item"><summary>며칠부터 지낼 수 있나요?</summary><div class="a"><p>최소 6박부터 최대 6개월까지 계약하실 수 있어요 <br>일주일 살기, 한 달 살기, 실습이나 출장 일정에 맞춰 편하게 정해 주세요</p></div></details><details class="faq-item"><summary>임대료 말고 따로 드는 비용이 있나요?</summary><div class="a"><p>공과금(전기·수도·난방)과 관리비, 인터넷, 공용 비품, 공용 복합기 사용까지 <br>모두 임대료에 포함되어 있어요 <br>입주하실 때 보증금 10~30만 원만 따로 준비해 주시면 돼요 <br>공과금은 평균 사용량을 크게 넘을 때만 초과분을 따로 안내해 드리고, <br>내 집처럼 사용해 주시면 초과되지 않아요 :)</p></div></details><details class="faq-item"><summary>한 달 넘게 지내면 임대료는 어떻게 내나요?</summary><div class="a"><p>첫 달 임대료와 보증금을 입금하시면 입주가 확정돼요 <br>그다음부터는 입주하신 날을 기준으로 매월 임대료를 입금해 주시면 돼요</p></div></details><details class="faq-item"><summary>무엇을 챙겨 가야 하나요?</summary><div class="a"><p>침구류와 개인 위생용품(수건, 세면도구 등)은 제공되지 않아 따로 챙겨 와 주세요 <br>침구는 준비가 어려우신 경우에만 대여해 드려요 <br>휴지와 세제 같은 공용 비품과 주방 식기는 준비되어 있어요</p></div></details><details class="faq-item"><summary>보안은 괜찮은가요?</summary><div class="a"><p>로우카는 강릉대로 대로변에 있는 건물이라 늦은 시간에도 오가기 안심돼요 <br>방마다 개별 도어락이 있고, 공용 공간에도 CCTV가 있어요 <br>남녀 화장실과 샤워실도 따로 나뉘어 있어요</p></div></details></div>
+      <div class="faq-wrap faq-home"><details class="faq-item"><summary>쉐어하우스(셰어하우스)가 처음인데 지내기 괜찮을까요?</summary><div class="a"><p><span class="ln">함께 지내는 공간이지만 각자의 프라이버시는 충분히 지켜져요</span> <span class="ln">방마다 개별 도어락이 있어 방문을 닫으면 온전히 나만의 공간이에요</span> <span class="ln">거실과 주방, 세탁실만 함께 쓰고, 한 집에 최대 5명만 지내서 북적이지 않아요</span></p></div></details><details class="faq-item"><summary>며칠부터 지낼 수 있나요?</summary><div class="a"><p><span class="ln">최소 6박부터 최대 6개월까지 계약하실 수 있어요</span> <span class="ln">일주일 살기, 한 달 살기, 실습이나 출장 일정에 맞춰 편하게 정해 주세요</span></p></div></details><details class="faq-item"><summary>임대료 말고 따로 드는 비용이 있나요?</summary><div class="a"><p><span class="ln">공과금(전기·수도·난방)과 관리비, 인터넷, 공용 비품, 공용 복합기 사용까지 모두 임대료에 포함되어 있어요</span> <span class="ln">입주하실 때 보증금 10~30만&nbsp;원만 따로 준비해 주시면 돼요</span> <span class="ln">공과금은 평균 사용량을 크게 넘을 때만 초과분을 따로 안내해 드리고, 내 집처럼 사용해 주시면 초과되지 않아요 :)</span></p></div></details><details class="faq-item"><summary>한 달 넘게 지내면 임대료는 어떻게 내나요?</summary><div class="a"><p><span class="ln">첫 달 임대료와 보증금을 입금하시면 입주가 확정돼요</span> <span class="ln">그다음부터는 입주하신 날을 기준으로 매월 임대료를 입금해 주시면 돼요</span></p></div></details><details class="faq-item"><summary>무엇을 챙겨 가야 하나요?</summary><div class="a"><p><span class="ln">침구류와 개인 위생용품(수건, 세면도구 등)은 제공되지 않아 따로 챙겨 와 주세요</span> <span class="ln">침구는 준비가 어려우신 경우에만 대여해 드려요</span> <span class="ln">휴지와 세제 같은 공용 비품과 주방 식기는 준비되어 있어요</span></p></div></details><details class="faq-item"><summary>보안은 괜찮은가요?</summary><div class="a"><p><span class="ln">로우카는 강릉대로 대로변에 있는 건물이라 늦은 시간에도 오가기 안심돼요</span> <span class="ln">방마다 개별 도어락이 있고, 공용 공간에도 CCTV가 있어요</span> <span class="ln">남녀 화장실과 샤워실도 따로 나뉘어 있어요</span></p></div></details></div>
       <div class="center-btn"><a class="line-btn" href="../faq/">자주 묻는 질문 더 보기</a></div>
     </div>
   </section>
@@ -897,12 +902,12 @@ p{text-wrap:pretty}
     <div class="sub-head"><p class="crumb"><a href="../">HOME</a><span>›</span><span id="stayCrumb">강릉 단기임대</span></p></div>
     <div id="stayBody"><section style="padding-top:40px">
     <div class="title"><h1 class="title-h"><span class="en">SHORT-TERM</span><span class="ko">강릉 단기임대, 계약부터 생활까지 간단하게</span></h1></div>
-    <p class="stay-lead">강릉에서 한 달 단위로 지낼 방이나 단기 원룸을 알아보고 계신다면<br>6박부터 6개월까지 계약하고 지내는 로우카를 만나 보세요</p>
+    <p class="stay-lead">강릉에서 한 달 단위로 지낼 방이나 단기 원룸을 알아보고 계신다면 6박부터 6개월까지 계약하고 지내는 로우카를 만나 보세요</p>
     <div class="stay-photos"><span class="photo"><img src="../images/jeumeu-1.jpg" alt="강릉 쉐어하우스 로우카 강릉 단기임대 사진 1" loading="eager"></span><span class="photo"><img src="../images/sinami-1.jpg" alt="강릉 쉐어하우스 로우카 강릉 단기임대 사진 2" loading="lazy"></span><span class="photo"><img src="../images/haseulla-1.jpg" alt="강릉 쉐어하우스 로우카 강릉 단기임대 사진 3" loading="lazy"></span></div>
-    <div class="who"><div class="who-item"><p class="en">DEPOSIT</p><h3>부담 적은 보증금</h3><p>보증금은 10~30만 원이고,<br>퇴거하실 때 방 상태를 확인한 뒤 돌려 드려요</p></div><div class="who-item"><p class="en">INCLUDED</p><h3>공과금 · 인터넷 포함</h3><p>공과금과 관리비, 인터넷, 공용 비품까지 임대료에 모두 포함되어 있어요</p></div><div class="who-item"><p class="en">SHARE</p><h3>방은 각자, 생활은 함께</h3><p>방은 각자 쓰고 거실과 주방, 세탁실을 함께 사용해요</p></div><div class="who-item"><p class="en">MONTHLY</p><h3>월 단위 납부</h3><p>첫 달 임대료와 보증금을 입금하시면 입주가 확정되고,<br>이후에는 입주일 기준으로 매월 입금하시면 돼요</p></div></div>
+    <div class="who"><div class="who-item"><p class="en">DEPOSIT</p><h3>부담 적은 보증금</h3><p>보증금은 10~30만&nbsp;원이고, 퇴거하실 때 방 상태를 확인한 뒤 돌려 드려요</p></div><div class="who-item"><p class="en">INCLUDED</p><h3>공과금 · 인터넷 포함</h3><p>공과금과 관리비, 인터넷, 공용 비품까지 임대료에 모두 포함되어 있어요</p></div><div class="who-item"><p class="en">SHARE</p><h3>방은 각자, 생활은 함께</h3><p>방은 각자 쓰고 거실과 주방, 세탁실을 함께 사용해요</p></div><div class="who-item"><p class="en">MONTHLY</p><h3>월 단위 납부</h3><p>첫 달 임대료와 보증금을 입금하시면 입주가 확정되고, 이후에는 입주일 기준으로 매월 입금하시면 돼요</p></div></div>
     <div class="stay-cols">
-      <div><h2 class="stay-h">한눈에 보기</h2><dl class="spec"><div><dt>보증금</dt><dd>10~30만 원</dd></div><div><dt>임대료</dt><dd>한 달 기준 약 40~65만 원 (예시 금액)<br>지내시는 기간에 따라 인하해 드려요</dd></div><div><dt>임대료 포함</dt><dd>공과금(전기·수도·난방), 관리비, 인터넷,<br>공용 비품, 공용 복합기 사용</dd></div><div><dt>이용 기간</dt><dd>최소 6박 ~ 최대 6개월</dd></div><div><dt>계약</dt><dd>카카오톡·전화 상담 → 계약서 작성 → 결제 후 입주 확정</dd></div></dl></div>
-      <div><h2 class="stay-h">자주 묻는 질문</h2><div class="faq-home"><details class="faq-item"><summary>숙박업소와는 어떻게 다른가요?</summary><div class="a"><p>로우카는 계약서를 쓰고 일정 기간 생활하는 주거형 단기 임대 공간이에요 <br>침구류와 개인 위생용품(수건, 세면도구 등)은 제공되지 않아 따로 챙겨 와 주세요</p></div></details><details class="faq-item"><summary>임대료 말고 따로 드는 비용이 있나요?</summary><div class="a"><p>공과금(전기·수도·난방)과 관리비, 인터넷, 공용 비품, 공용 복합기 사용까지 <br>모두 임대료에 포함되어 있어요 <br>입주하실 때 보증금 10~30만 원만 따로 준비해 주시면 돼요 <br>공과금은 평균 사용량을 크게 넘을 때만 초과분을 따로 안내해 드리고, <br>내 집처럼 사용해 주시면 초과되지 않아요 :)</p></div></details><details class="faq-item"><summary>한 달 넘게 지내면 임대료는 어떻게 내나요?</summary><div class="a"><p>첫 달 임대료와 보증금을 입금하시면 입주가 확정돼요 <br>그다음부터는 입주하신 날을 기준으로 매월 임대료를 입금해 주시면 돼요</p></div></details><details class="faq-item"><summary>보증금은 언제 돌려받나요?</summary><div class="a"><p>퇴거하실 때 방 상태를 함께 확인한 뒤 돌려 드려요 <br>자세한 내용은 계약할 때 차근차근 안내해 드릴게요</p></div></details><details class="faq-item"><summary>지내다가 기간을 늘릴 수 있나요?</summary><div class="a"><p>다음 입주 일정이 비어 있다면 최대 6개월까지 연장할 수 있어요 <br>연장을 원하시면 퇴거일 전에 카카오톡으로 미리 말씀해 주세요</p></div></details></div></div>
+      <div><h2 class="stay-h">한눈에 보기</h2><dl class="spec"><div><dt>보증금</dt><dd>10~30만&nbsp;원</dd></div><div><dt>임대료</dt><dd>한 달 기준 약 40~65만&nbsp;원 (예시 금액)<br>지내시는 기간에 따라 인하해 드려요</dd></div><div><dt>임대료 포함</dt><dd>공과금(전기·수도·난방), 관리비, 인터넷, 공용 비품, 공용 복합기 사용</dd></div><div><dt>이용 기간</dt><dd>최소 6박 ~ 최대 6개월</dd></div><div><dt>계약</dt><dd>카카오톡·전화 상담 → 계약서 작성 → 결제 후 입주 확정</dd></div></dl></div>
+      <div><h2 class="stay-h">자주 묻는 질문</h2><div class="faq-home"><details class="faq-item"><summary>숙박업소와는 어떻게 다른가요?</summary><div class="a"><p><span class="ln">로우카는 계약서를 쓰고 일정 기간 생활하는 주거형 단기 임대 공간이에요</span> <span class="ln">침구류와 개인 위생용품(수건, 세면도구 등)은 제공되지 않아 따로 챙겨 와 주세요</span></p></div></details><details class="faq-item"><summary>임대료 말고 따로 드는 비용이 있나요?</summary><div class="a"><p><span class="ln">공과금(전기·수도·난방)과 관리비, 인터넷, 공용 비품, 공용 복합기 사용까지 모두 임대료에 포함되어 있어요</span> <span class="ln">입주하실 때 보증금 10~30만&nbsp;원만 따로 준비해 주시면 돼요</span> <span class="ln">공과금은 평균 사용량을 크게 넘을 때만 초과분을 따로 안내해 드리고, 내 집처럼 사용해 주시면 초과되지 않아요 :)</span></p></div></details><details class="faq-item"><summary>한 달 넘게 지내면 임대료는 어떻게 내나요?</summary><div class="a"><p><span class="ln">첫 달 임대료와 보증금을 입금하시면 입주가 확정돼요</span> <span class="ln">그다음부터는 입주하신 날을 기준으로 매월 임대료를 입금해 주시면 돼요</span></p></div></details><details class="faq-item"><summary>보증금은 언제 돌려받나요?</summary><div class="a"><p><span class="ln">퇴거하실 때 방 상태를 함께 확인한 뒤 돌려 드려요</span> <span class="ln">자세한 내용은 계약할 때 차근차근 안내해 드릴게요</span></p></div></details><details class="faq-item"><summary>지내다가 기간을 늘릴 수 있나요?</summary><div class="a"><p><span class="ln">다음 입주 일정이 비어 있다면 최대 6개월까지 연장할 수 있어요</span> <span class="ln">연장을 원하시면 퇴거일 전에 카카오톡으로 미리 말씀해 주세요</span></p></div></details></div></div>
     </div>
     <h2 class="stay-h">방 둘러보기</h2>
     <div class="other-grid stay-rooms"><a href="../jeumeu/"><span class="photo"><img src="../images/jeumeu-1.jpg" alt="강릉 단기임대 1인실 즈므" loading="lazy"></span><span>즈므<small>1인실</small></span></a><a href="../sinami/"><span class="photo"><img src="../images/sinami-1.jpg" alt="강릉 단기임대 1인실 시나미" loading="lazy"></span><span>시나미<small>1인실</small></span></a><a href="../yunseul/"><span class="photo"><img src="../images/yunseul-1.jpg" alt="강릉 단기임대 1인실 윤슬" loading="lazy"></span><span>윤슬<small>1인실</small></span></a><a href="../haseulla/"><span class="photo"><img src="../images/haseulla-1.jpg" alt="강릉 단기임대 2인 셰어룸 하슬라" loading="lazy"></span><span>하슬라<small>2인 셰어룸</small></span></a></div>
@@ -932,10 +937,10 @@ p{text-wrap:pretty}
           <div><p class="no">05</p><h3>남녀 화장실이 따로예요</h3><p>남녀 화장실과 샤워실이 따로 나뉘어 있어 편하게 써요</p></div>
           <div><p class="no">06</p><h3>공용 공간은 매주 관리해요</h3><p>거실과 주방, 화장실 같은 공용 공간은 주 1회 정기 청소로 관리하고 있어요</p></div>
         </div>
-        <div class="faq-cat" id="faq-before"><div class="faq-cat-h"><p class="en">BEFORE MOVING IN</p><h2>처음이라면</h2></div><div class="faq-list"><details class="faq-item"><summary>쉐어하우스(셰어하우스)가 처음인데 지내기 괜찮을까요?</summary><div class="a"><p>함께 지내는 공간이지만 각자의 프라이버시는 충분히 지켜져요 <br>방마다 개별 도어락이 있어 방문을 닫으면 온전히 나만의 공간이에요 <br>거실과 주방, 세탁실만 함께 쓰고, 한 집에 최대 5명만 지내서 북적이지 않아요</p></div></details><details class="faq-item"><summary>숙박업소와는 어떻게 다른가요?</summary><div class="a"><p>로우카는 계약서를 쓰고 일정 기간 생활하는 주거형 단기 임대 공간이에요 <br>침구류와 개인 위생용품(수건, 세면도구 등)은 제공되지 않아 따로 챙겨 와 주세요</p></div></details><details class="faq-item"><summary>혼자 쓰는 방이 있나요?</summary><div class="a"><p>즈므, 시나미, 윤슬 세 곳이 혼자 쓰는 1인실이에요 <br>하슬라는 두 분이 함께 쓰는 셰어룸이고, 먼저 지내는 분이 계시면 같은 성별인 분과 함께 써요</p></div></details><details class="faq-item"><summary>며칠부터 지낼 수 있나요?</summary><div class="a"><p>최소 6박부터 최대 6개월까지 계약하실 수 있어요 <br>일주일 살기, 한 달 살기, 실습이나 출장 일정에 맞춰 편하게 정해 주세요</p></div></details><details class="faq-item"><summary>입주 가능한 날짜는 어떻게 확인하나요?</summary><div class="a"><p><a href="../#availability">입주 가능일 달력</a>에서 날짜를 누르면 그날 입주할 수 있는 방이 보여요 <br>입주일과 퇴거일을 고르시면 그 기간에 지낼 수 있는 방도 함께 확인하실 수 있어요</p></div></details></div></div>
-<div class="faq-cat" id="faq-cost"><div class="faq-cat-h"><p class="en">COST &amp; CONTRACT</p><h2>비용 · 계약</h2></div><div class="faq-list"><details class="faq-item"><summary>임대료 말고 따로 드는 비용이 있나요?</summary><div class="a"><p>공과금(전기·수도·난방)과 관리비, 인터넷, 공용 비품, 공용 복합기 사용까지 <br>모두 임대료에 포함되어 있어요 <br>입주하실 때 보증금 10~30만 원만 따로 준비해 주시면 돼요 <br>공과금은 평균 사용량을 크게 넘을 때만 초과분을 따로 안내해 드리고, <br>내 집처럼 사용해 주시면 초과되지 않아요 :)</p></div></details><details class="faq-item"><summary>결제는 어떻게 하나요?</summary><div class="a"><p>상담 후 계약서를 작성하시면 결제 방법을 함께 안내해 드려요 <br>임대료 결제까지 마치면 입주가 확정돼요</p></div></details><details class="faq-item"><summary>한 달 넘게 지내면 임대료는 어떻게 내나요?</summary><div class="a"><p>첫 달 임대료와 보증금을 입금하시면 입주가 확정돼요 <br>그다음부터는 입주하신 날을 기준으로 매월 임대료를 입금해 주시면 돼요</p></div></details><details class="faq-item"><summary>보증금은 언제 돌려받나요?</summary><div class="a"><p>퇴거하실 때 방 상태를 함께 확인한 뒤 돌려 드려요 <br>자세한 내용은 계약할 때 차근차근 안내해 드릴게요</p></div></details><details class="faq-item"><summary>지내다가 기간을 늘릴 수 있나요?</summary><div class="a"><p>다음 입주 일정이 비어 있다면 최대 6개월까지 연장할 수 있어요 <br>연장을 원하시면 퇴거일 전에 카카오톡으로 미리 말씀해 주세요</p></div></details></div></div>
-<div class="faq-cat" id="faq-living"><div class="faq-cat-h"><p class="en">LIVING</p><h2>생활</h2></div><div class="faq-list"><details class="faq-item"><summary>무엇을 챙겨 가야 하나요?</summary><div class="a"><p>침구류와 개인 위생용품(수건, 세면도구 등)은 제공되지 않아 따로 챙겨 와 주세요 <br>침구는 준비가 어려우신 경우에만 대여해 드려요 <br>휴지와 세제 같은 공용 비품과 주방 식기는 준비되어 있어요</p></div></details><details class="faq-item"><summary>요리를 해 먹을 수 있나요?</summary><div class="a"><p>네, 공용 주방에서 자유롭게 요리하실 수 있어요 <br>인덕션과 냉장고, 전자레인지, 에어프라이기, 발뮤다 토스터기, 일리 캡슐머신, 전기밥솥, <br>음식물처리기에 식기와 조리도구까지 갖춰져 있어요</p></div></details><details class="faq-item"><summary>빨래는 어떻게 하나요?</summary><div class="a"><p>세탁기와 건조기가 있는 세탁실을 자유롭게 쓰실 수 있어요 <br>세제와 빨래 건조대도 준비되어 있어요</p></div></details><details class="faq-item"><summary>노트북으로 일하기 괜찮을까요?</summary><div class="a"><p>네, 와이파이가 있고 방마다 책상도 준비되어 있어요 <br>거실 공용 공간도 다양한 일을 하기에 좋은 공간이에요</p></div></details><details class="faq-item"><summary>보안은 괜찮은가요?</summary><div class="a"><p>로우카는 강릉대로 대로변에 있는 건물이라 늦은 시간에도 오가기 안심돼요 <br>방마다 개별 도어락이 있고, 공용 공간에도 CCTV가 있어요 <br>남녀 화장실과 샤워실도 따로 나뉘어 있어요</p></div></details><details class="faq-item"><summary>청소는 어떻게 하나요?</summary><div class="a"><p>지내시는 방은 직접 정리해 주셔야 해요 <br>거실과 주방 같은 공용 공간은 주 1회 정기 청소를 하고 있으니, 평소에는 사용 후 뒷정리만 부탁드려요</p></div></details><details class="faq-item"><summary>흡연이나 반려동물은 괜찮나요?</summary><div class="a"><p>여럿이 함께 사는 공간이라 실내 흡연과 반려동물 동반은 어려워요 <br>모두가 편하게 지낼 수 있도록 양해 부탁드려요</p></div></details></div></div>
-<div class="faq-cat" id="faq-location"><div class="faq-cat-h"><p class="en">LOCATION</p><h2>위치 · 교통</h2></div><div class="faq-list"><details class="faq-item"><summary>차 없이 지내도 괜찮을까요?</summary><div class="a"><p>네, KTX 강릉역까지 걸어서 5분이라 차 없이도 편하게 지내실 수 있어요 <br>편의점은 3분, 월화거리는 5분, 홈플러스는 10분 거리라 장 보기도 걸어서 충분해요</p></div></details><details class="faq-item"><summary>주차할 수 있나요?</summary><div class="a"><p>입주가 확정되면 도보 5분 거리의 주차 장소를 안내해 드려요</p></div></details><details class="faq-item"><summary>강릉 병원 실습으로 방문하는데 지내기 괜찮을까요?</summary><div class="a"><p>강릉의료원은 차로 약 5분, 강릉동인병원은 약 7분, 강릉아산병원은 약 10~15분 거리예요 <br>실습 일정에 맞춰 6박부터 계약하실 수 있어요 <br>2인 셰어룸 하슬라는 함께 실습하는 친구분과 같이 지내기에도 좋아요</p></div></details><details class="faq-item"><summary>출장이나 교육으로 지내기에도 괜찮나요?</summary><div class="a"><p>KTX 강릉역에서 걸어서 5분이면 도착해요 <br>강릉과학산업단지는 차로 약 15분, 강릉시청은 약 8분 거리예요</p></div></details></div></div>
+        <div class="faq-cat" id="faq-before"><div class="faq-cat-h"><p class="en">BEFORE MOVING IN</p><h2>처음이라면</h2></div><div class="faq-list"><details class="faq-item"><summary>쉐어하우스(셰어하우스)가 처음인데 지내기 괜찮을까요?</summary><div class="a"><p><span class="ln">함께 지내는 공간이지만 각자의 프라이버시는 충분히 지켜져요</span> <span class="ln">방마다 개별 도어락이 있어 방문을 닫으면 온전히 나만의 공간이에요</span> <span class="ln">거실과 주방, 세탁실만 함께 쓰고, 한 집에 최대 5명만 지내서 북적이지 않아요</span></p></div></details><details class="faq-item"><summary>숙박업소와는 어떻게 다른가요?</summary><div class="a"><p><span class="ln">로우카는 계약서를 쓰고 일정 기간 생활하는 주거형 단기 임대 공간이에요</span> <span class="ln">침구류와 개인 위생용품(수건, 세면도구 등)은 제공되지 않아 따로 챙겨 와 주세요</span></p></div></details><details class="faq-item"><summary>혼자 쓰는 방이 있나요?</summary><div class="a"><p><span class="ln">즈므, 시나미, 윤슬 세 곳이 혼자 쓰는 1인실이에요</span> <span class="ln">하슬라는 두 분이 함께 쓰는 셰어룸이고, 먼저 지내는 분이 계시면 같은 성별인 분과 함께 써요</span></p></div></details><details class="faq-item"><summary>며칠부터 지낼 수 있나요?</summary><div class="a"><p><span class="ln">최소 6박부터 최대 6개월까지 계약하실 수 있어요</span> <span class="ln">일주일 살기, 한 달 살기, 실습이나 출장 일정에 맞춰 편하게 정해 주세요</span></p></div></details><details class="faq-item"><summary>입주 가능한 날짜는 어떻게 확인하나요?</summary><div class="a"><p><span class="ln"><a href="../#availability">입주 가능일 달력</a>에서 날짜를 누르면 그날 입주할 수 있는 방이 보여요</span> <span class="ln">입주일과 퇴거일을 고르시면 그 기간에 지낼 수 있는 방도 함께 확인하실 수 있어요</span></p></div></details></div></div>
+<div class="faq-cat" id="faq-cost"><div class="faq-cat-h"><p class="en">COST &amp; CONTRACT</p><h2>비용 · 계약</h2></div><div class="faq-list"><details class="faq-item"><summary>임대료 말고 따로 드는 비용이 있나요?</summary><div class="a"><p><span class="ln">공과금(전기·수도·난방)과 관리비, 인터넷, 공용 비품, 공용 복합기 사용까지 모두 임대료에 포함되어 있어요</span> <span class="ln">입주하실 때 보증금 10~30만&nbsp;원만 따로 준비해 주시면 돼요</span> <span class="ln">공과금은 평균 사용량을 크게 넘을 때만 초과분을 따로 안내해 드리고, 내 집처럼 사용해 주시면 초과되지 않아요 :)</span></p></div></details><details class="faq-item"><summary>결제는 어떻게 하나요?</summary><div class="a"><p><span class="ln">상담 후 계약서를 작성하시면 결제 방법을 함께 안내해 드려요</span> <span class="ln">임대료 결제까지 마치면 입주가 확정돼요</span></p></div></details><details class="faq-item"><summary>한 달 넘게 지내면 임대료는 어떻게 내나요?</summary><div class="a"><p><span class="ln">첫 달 임대료와 보증금을 입금하시면 입주가 확정돼요</span> <span class="ln">그다음부터는 입주하신 날을 기준으로 매월 임대료를 입금해 주시면 돼요</span></p></div></details><details class="faq-item"><summary>보증금은 언제 돌려받나요?</summary><div class="a"><p><span class="ln">퇴거하실 때 방 상태를 함께 확인한 뒤 돌려 드려요</span> <span class="ln">자세한 내용은 계약할 때 차근차근 안내해 드릴게요</span></p></div></details><details class="faq-item"><summary>지내다가 기간을 늘릴 수 있나요?</summary><div class="a"><p><span class="ln">다음 입주 일정이 비어 있다면 최대 6개월까지 연장할 수 있어요</span> <span class="ln">연장을 원하시면 퇴거일 전에 카카오톡으로 미리 말씀해 주세요</span></p></div></details></div></div>
+<div class="faq-cat" id="faq-living"><div class="faq-cat-h"><p class="en">LIVING</p><h2>생활</h2></div><div class="faq-list"><details class="faq-item"><summary>무엇을 챙겨 가야 하나요?</summary><div class="a"><p><span class="ln">침구류와 개인 위생용품(수건, 세면도구 등)은 제공되지 않아 따로 챙겨 와 주세요</span> <span class="ln">침구는 준비가 어려우신 경우에만 대여해 드려요</span> <span class="ln">휴지와 세제 같은 공용 비품과 주방 식기는 준비되어 있어요</span></p></div></details><details class="faq-item"><summary>요리를 해 먹을 수 있나요?</summary><div class="a"><p><span class="ln">네, 공용 주방에서 자유롭게 요리하실 수 있어요</span> <span class="ln">인덕션과 냉장고, 전자레인지, 에어프라이기, 발뮤다 토스터기, 일리 캡슐머신, 전기밥솥, 음식물처리기에 식기와 조리도구까지 갖춰져 있어요</span></p></div></details><details class="faq-item"><summary>빨래는 어떻게 하나요?</summary><div class="a"><p><span class="ln">세탁기와 건조기가 있는 세탁실을 자유롭게 쓰실 수 있어요</span> <span class="ln">세제와 빨래 건조대도 준비되어 있어요</span></p></div></details><details class="faq-item"><summary>노트북으로 일하기 괜찮을까요?</summary><div class="a"><p><span class="ln">네, 와이파이가 있고 방마다 책상도 준비되어 있어요</span> <span class="ln">거실 공용 공간도 다양한 일을 하기에 좋은 공간이에요</span></p></div></details><details class="faq-item"><summary>보안은 괜찮은가요?</summary><div class="a"><p><span class="ln">로우카는 강릉대로 대로변에 있는 건물이라 늦은 시간에도 오가기 안심돼요</span> <span class="ln">방마다 개별 도어락이 있고, 공용 공간에도 CCTV가 있어요</span> <span class="ln">남녀 화장실과 샤워실도 따로 나뉘어 있어요</span></p></div></details><details class="faq-item"><summary>청소는 어떻게 하나요?</summary><div class="a"><p><span class="ln">지내시는 방은 직접 정리해 주셔야 해요</span> <span class="ln">거실과 주방 같은 공용 공간은 주 1회 정기 청소를 하고 있으니, 평소에는 사용 후 뒷정리만 부탁드려요</span></p></div></details><details class="faq-item"><summary>흡연이나 반려동물은 괜찮나요?</summary><div class="a"><p><span class="ln">여럿이 함께 사는 공간이라 실내 흡연과 반려동물 동반은 어려워요</span> <span class="ln">모두가 편하게 지낼 수 있도록 양해 부탁드려요</span></p></div></details></div></div>
+<div class="faq-cat" id="faq-location"><div class="faq-cat-h"><p class="en">LOCATION</p><h2>위치 · 교통</h2></div><div class="faq-list"><details class="faq-item"><summary>차 없이 지내도 괜찮을까요?</summary><div class="a"><p><span class="ln">네, KTX 강릉역까지 걸어서 5분이라 차 없이도 편하게 지내실 수 있어요</span> <span class="ln">편의점은 3분, 월화거리는 5분, 홈플러스는 10분 거리라 장 보기도 걸어서 충분해요</span></p></div></details><details class="faq-item"><summary>주차할 수 있나요?</summary><div class="a"><p><span class="ln">입주가 확정되면 도보 5분 거리의 주차 장소를 안내해 드려요</span></p></div></details><details class="faq-item"><summary>강릉 병원 실습으로 방문하는데 지내기 괜찮을까요?</summary><div class="a"><p><span class="ln">강릉의료원은 차로 약 5분, 강릉동인병원은 약 7분, 강릉아산병원은 약 10~15분 거리예요</span> <span class="ln">실습 일정에 맞춰 6박부터 계약하실 수 있어요</span> <span class="ln">2인 셰어룸 하슬라는 함께 실습하는 친구분과 같이 지내기에도 좋아요</span></p></div></details><details class="faq-item"><summary>출장이나 교육으로 지내기에도 괜찮나요?</summary><div class="a"><p><span class="ln">KTX 강릉역에서 걸어서 5분이면 도착해요</span> <span class="ln">강릉과학산업단지는 차로 약 15분, 강릉시청은 약 8분 거리예요</span></p></div></details></div></div>
         <div class="faq-cta">
           <p class="cta-t">더 궁금한 점이 있으세요?</p>
           <p>작은 것이라도 편하게 물어봐 주세요<br>입주 기간과 원하는 방을 알려 주시면 더 빠르게 안내해 드릴게요</p>
@@ -1003,24 +1008,24 @@ const SPOTS = [
 const COMMON_ITEMS = ["방별 도어락"];
 // 방 정보 size(면적), rent(임대료)를 채우면 상세 화면에 나와요
 const ROOMS = [
-  { id: "jeumeu", name: "즈므", en: "JEUMEU", type: "1인실", tagline: "따스한 노을이 담긴", focus: "50% 100%",
+  { id: "jeumeu", brief: "노을이 드는 창가", name: "즈므", en: "JEUMEU", type: "1인실", tagline: "따스한 노을이 담긴", focus: "50% 100%",
     card: "해가 저무는 마을이라는 뜻이에요",
-    desc: "노을이 예쁘게 드는 창가에서 하루의 끝을 조용히 정리하기 좋아요",
+    desc: "노을이 예쁘게 드는 창가에서 하루를 조용히 정리하기 좋아요",
     summary: "‘즈므’는 해가 저무는 마을이라는 뜻이에요<br>창 너머로 노을이 예쁘게 드는 방이라 하루의 끝을 조용히 정리하기 좋아요",
     items: ["침대", "책상", "수납장", "벽걸이 냉난방기"], size: "", rent: "" },
-  { id: "sinami", name: "시나미", en: "SINAMI", type: "1인실", tagline: "느긋한 쉼이 있는",
+  { id: "sinami", brief: "부드러운 빛이 드는 조용한 방", name: "시나미", en: "SINAMI", type: "1인실", tagline: "느긋한 쉼이 있는",
     card: "‘시나미’는 강릉 말로 ‘천천히’라는 뜻이에요",
-    desc: "도심의 빠른 속도에서 벗어나 느긋하게 쉬고 싶은 분께 추천해요",
+    desc: "빠른 일상에서 벗어나 느긋하게 쉬고 싶은 분께 추천해요",
     summary: "‘시나미’는 강릉 말로 ‘천천히’라는 뜻이에요<br>부드러운 빛이 드는 조용한 방이라 느긋하게 쉬고 싶은 분께 추천해요",
     items: ["침대", "책상", "수납장", "벽걸이 냉난방기"], size: "", rent: "" },
-  { id: "yunseul", name: "윤슬", en: "YUNSEUL", type: "1인실", tagline: "차분한 일상을 위한",
+  { id: "yunseul", brief: "차분하고 아늑한 방", name: "윤슬", en: "YUNSEUL", type: "1인실", tagline: "차분한 일상을 위한",
     card: "햇빛과 달빛에 반짝이는 물결을 뜻해요",
-    desc: "윤슬처럼 차분하고 아늑해서 혼자만의 시간을 보내기 좋은 방이에요",
+    desc: "윤슬처럼 차분하고 아늑해 혼자만의 시간을 보내기 좋아요",
     summary: "‘윤슬’은 햇빛이나 달빛에 반짝이는 물결을 뜻해요<br>윤슬처럼 차분하고 아늑한 방이라 혼자만의 시간을 조용히 보내기 좋아요",
     items: ["침대", "책상", "수납장", "벽걸이 냉난방기"], size: "", rent: "" },
-  { id: "haseulla", name: "하슬라", en: "HASEULLA", type: "2인 셰어룸", tagline: "따뜻한 일상이 시작되는",
+  { id: "haseulla", brief: "둘이 함께 쓰는 방", name: "하슬라", en: "HASEULLA", type: "2인 셰어룸", tagline: "따뜻한 일상이 시작되는",
     card: "해와 밝음을 뜻하는 강릉의 옛 지명이에요",
-    desc: "일행 또는 다른 분과 방을 함께 쓰며 일상과 쉼을 나눌 수 있는 방이에요",
+    desc: "일행 또는 다른 분과 함께 쓰며 일상과 쉼을 나누는 방이에요",
     summary: "‘하슬라’는 해와 밝음을 뜻하는 강릉의 옛 지명이에요<br>두 분이 함께 쓰는 셰어룸이라 서로의 일상과 쉼을 나누며 지낼 수 있어요",
     items: ["침대 2개", "책상 2개", "수납장", "벽걸이 냉난방기"], size: "", rent: "",
     rentNote: "1인 기준으로 받고, 일행과 함께 계약하시면 할인해 드려요<br>정확한 금액은 따로 문의해 주세요",
@@ -1198,7 +1203,7 @@ let gList = [], gIdx = 0, currentRoom = null;
 function renderRoom(id) {
   const r = roomById(id); if (!r) return false;
   currentRoom = id;
-  if (!SITE) document.title = `${r.name} ${r.type} · 강릉 단기임대 쉐어하우스 로우카`;
+  if (!SITE) document.title = `${r.name} ${r.type} · ${r.brief} | 로우카 쉐어하우스`;
   $("#crumbName").textContent = r.name;
   gList = photosOf(r.id);
   $("#strip").innerHTML = gList.map((f, i) => `<button type="button" data-i="${i}" aria-label="${r.name} 사진 ${i + 1} 크게 보기"><img src="${img(f)}" alt="강릉 단기임대 ${r.type} ${r.name} 내부 사진 ${i + 1}" ${i > 2 ? 'loading="lazy"' : ""}></button>`).join("");
@@ -1208,8 +1213,8 @@ function renderRoom(id) {
     ["방 안에는", r.items.join(", ")], ["보안", "방마다 개별 도어락, 공용 공간 CCTV"], ["함께 쓰는 공간", "거실, 주방, 남녀 화장실·샤워실, 세탁실, 옥상정원"],
     ["입주 현황", WAIT ? "" : `<span class="state">${statusHtml(r.id)}</span>`]].filter(([, v]) => v);
   $("#roomInfo").innerHTML = `
-    <div><p class="en">${r.tagline}</p><h1>${r.name}<small>${r.type}</small></h1></div>
-        <p class="summary">${r.summary}</p>
+    <div><p class="en">${r.tagline}</p><h1>${r.name}<small> ${r.type} · ${r.brief}</small></h1></div>
+        <p class="summary">${lines(r.summary)}</p>
     ${r.note ? `<p class="share-note">${r.note}</p>` : ""}
     <dl class="spec">${spec.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
     <div class="actions"><button class="solid-btn" type="button" id="roomCheck">이 방 입주 가능일 보기</button><a class="line-btn" href="${link("guide")}" style="height:52px">입주 안내</a></div>`;
@@ -1444,20 +1449,20 @@ addEventListener("hashchange", route);
 const STAYS = {
   hospital: {
     crumb: "강릉 병원 실습", en: "HOSPITAL", h1: "강릉 병원 실습 기간, 편하게 지낼 방",
-    lead: "강릉아산병원, 강릉의료원, 강릉동인병원 실습이나 연수로 강릉에 오셨다면<br>실습 일정에 맞춰 6박부터 계약할 수 있는 로우카를 만나 보세요",
+    lead: "강릉아산병원, 강릉의료원, 강릉동인병원 실습이나 연수로 강릉에 오셨다면 실습 일정에 맞춰 6박부터 계약할 수 있는 로우카를 만나 보세요",
     photos: ["sinami-1.jpg", "living-1.jpg", "kitchen-1.jpg"],
     points: [
-      ["NEAR", "병원까지 가까워요", "강릉의료원은 차로 약 5분, 강릉동인병원은 약 7분,<br>강릉아산병원은 약 10~15분 거리예요"],
-      ["SCHEDULE", "실습 일정에 맞춘 계약", "최소 6박부터 최대 6개월까지<br>실습 기간에 맞춰 입주일과 퇴거일을 정할 수 있어요"],
-      ["PRIVATE", "실습 후 온전한 쉼", "1인실은 방마다 개별 도어락이 있어<br>바쁜 하루 끝에 나만의 공간에서 쉴 수 있어요"],
+      ["NEAR", "병원까지 가까워요", "강릉의료원은 차로 약 5분, 강릉동인병원은 약 7분, 강릉아산병원은 약 10~15분 거리예요"],
+      ["SCHEDULE", "실습 일정에 맞춘 계약", "최소 6박부터 최대 6개월까지 실습 기간에 맞춰 입주일과 퇴거일을 정할 수 있어요"],
+      ["PRIVATE", "실습 후 온전한 쉼", "1인실은 방마다 개별 도어락이 있어 바쁜 하루 끝에 나만의 공간에서 쉴 수 있어요"],
       ["SIMPLE", "따로 챙길 비용이 적어요", "공과금과 관리비, 인터넷이 임대료에 모두 포함되어 있어요"]
     ],
-    info: [["가까운 병원", "강릉의료원 차로 약 5분<br>강릉동인병원 차로 약 7분<br>강릉아산병원 차로 약 10~15분"], ["이용 기간", "최소 6박 ~ 최대 6개월"], ["임대료", "한 달 기준 약 40~65만 원 (예시 금액)<br>지내시는 기간에 따라 인하해 드려요"], ["보증금", "10~30만 원"]],
+    info: [["가까운 병원", "강릉의료원 차로 약 5분<br>강릉동인병원 차로 약 7분<br>강릉아산병원 차로 약 10~15분"], ["이용 기간", "최소 6박 ~ 최대 6개월"], ["임대료", "한 달 기준 약 40~65만 원 (예시 금액)<br>지내시는 기간에 따라 인하해 드려요"], ["보증금", "10~30만 원"]],
     faq: ["강릉 병원 실습으로 방문하는데 지내기 괜찮을까요?", "며칠부터 지낼 수 있나요?", "임대료 말고 따로 드는 비용이 있나요?", "무엇을 챙겨 가야 하나요?", "한 달 넘게 지내면 임대료는 어떻게 내나요?"]
   },
   business: {
     crumb: "강릉 출장 · 교육", en: "BUSINESS", h1: "강릉 출장 · 교육 기간, 역 앞에서 지내기",
-    lead: "KTX 강릉역에서 걸어서 5분 거리라<br>서울에서 오가는 출장과 교육 일정에 잘 맞아요",
+    lead: "KTX 강릉역에서 걸어서 5분 거리라 서울에서 오가는 출장과 교육 일정에 잘 맞아요",
     photos: ["living-1.jpg", "sinami-1.jpg", "jeumeu-1.jpg"],
     points: [
       ["STATION", "강릉역 도보 5분", "KTX에서 내려 걸어서 바로 들어올 수 있어 짐이 많아도 오가기 편해요"],
@@ -1470,32 +1475,34 @@ const STAYS = {
   },
   monthly: {
     crumb: "강릉 한달살기 · 일주일살기", en: "LIVING", h1: "강릉 일주일 살기, 한 달 살기",
-    lead: "잠깐 들르는 여행 대신,<br>강릉의 일상 속에서 일주일, 한 달을 살아 보세요",
+    lead: "잠깐 들르는 여행 대신, 강릉의 일상 속에서 일주일, 한 달을 살아 보세요",
     photos: ["rooftop-2.jpg", "kitchen-4.jpg", "jeumeu-2.jpg"],
     points: [
-      ["WALK", "걸어서 닿는 일상", "월화거리는 걸어서 5분, 홈플러스는 10분,<br>강릉 중앙시장은 15분이면 닿아요"],
+      ["WALK", "걸어서 닿는 일상", "월화거리는 걸어서 5분, 홈플러스는 10분, 강릉 중앙시장은 15분이면 닿아요"],
       ["SEA", "바다까지 15분", "안목해변 커피거리는 차로 약 12분, 경포대는 약 15분 거리예요"],
-      ["KITCHEN", "직접 해 먹는 하루", "공용 주방에 인덕션과 에어프라이기, 식기까지 갖춰져 있어<br>장을 봐 와서 편하게 요리할 수 있어요"],
+      ["KITCHEN", "직접 해 먹는 하루", "공용 주방에 인덕션과 에어프라이기, 식기까지 갖춰져 있어 장을 봐 와서 편하게 요리할 수 있어요"],
       ["ROOFTOP", "노을 지는 옥상정원", "하루를 마무리하는 저녁에는 옥상정원에서 강릉의 하늘을 바라보세요"]
     ],
-    info: [["이용 기간", "최소 6박 ~ 최대 6개월<br>일주일 살기도, 한 달 살기도 가능해요"], ["임대료", "한 달 기준 약 40~65만 원 (예시 금액)<br>지내시는 기간에 따라 인하해 드려요"], ["임대료 포함", "공과금, 관리비, 인터넷, 공용 비품"], ["준비물", "침구류와 개인 위생용품(수건, 세면도구 등)은 따로 챙겨 와 주세요"]],
+    info: [["이용 기간", "최소 6박 ~ 최대 6개월<br>일주일 살기도, 한 달 살기도 가능해요"], ["임대료", "한 달 기준 약 40~65만 원 (예시 금액)<br>지내시는 기간에 따라 인하해 드려요"], ["임대료 포함", "공과금, 관리비, 인터넷, 공용 비품"], ["준비물", "침구류와 개인 위생용품(수건, 세면도구 등)은 따로 챙겨 와 주세요"]],
     faq: ["쉐어하우스(셰어하우스)가 처음인데 지내기 괜찮을까요?", "며칠부터 지낼 수 있나요?", "차 없이 지내도 괜찮을까요?", "요리를 해 먹을 수 있나요?", "무엇을 챙겨 가야 하나요?"]
   },
   "short-term": {
     crumb: "강릉 단기임대", en: "SHORT-TERM", h1: "강릉 단기임대, 계약부터 생활까지 간단하게",
-    lead: "강릉에서 한 달 단위로 지낼 방이나 단기 원룸을 알아보고 계신다면<br>6박부터 6개월까지 계약하고 지내는 로우카를 만나 보세요",
+    lead: "강릉에서 한 달 단위로 지낼 방이나 단기 원룸을 알아보고 계신다면 6박부터 6개월까지 계약하고 지내는 로우카를 만나 보세요",
     photos: ["jeumeu-1.jpg", "sinami-1.jpg", "haseulla-1.jpg"],
     points: [
-      ["DEPOSIT", "부담 적은 보증금", "보증금은 10~30만 원이고,<br>퇴거하실 때 방 상태를 확인한 뒤 돌려 드려요"],
+      ["DEPOSIT", "부담 적은 보증금", "보증금은 10~30만 원이고, 퇴거하실 때 방 상태를 확인한 뒤 돌려 드려요"],
       ["INCLUDED", "공과금 · 인터넷 포함", "공과금과 관리비, 인터넷, 공용 비품까지 임대료에 모두 포함되어 있어요"],
       ["SHARE", "방은 각자, 생활은 함께", "방은 각자 쓰고 거실과 주방, 세탁실을 함께 사용해요"],
-      ["MONTHLY", "월 단위 납부", "첫 달 임대료와 보증금을 입금하시면 입주가 확정되고,<br>이후에는 입주일 기준으로 매월 입금하시면 돼요"]
+      ["MONTHLY", "월 단위 납부", "첫 달 임대료와 보증금을 입금하시면 입주가 확정되고, 이후에는 입주일 기준으로 매월 입금하시면 돼요"]
     ],
-    info: [["보증금", "10~30만 원"], ["임대료", "한 달 기준 약 40~65만 원 (예시 금액)<br>지내시는 기간에 따라 인하해 드려요"], ["임대료 포함", "공과금(전기·수도·난방), 관리비, 인터넷,<br>공용 비품, 공용 복합기 사용"], ["이용 기간", "최소 6박 ~ 최대 6개월"], ["계약", "카카오톡·전화 상담 → 계약서 작성 → 결제 후 입주 확정"]],
+    info: [["보증금", "10~30만 원"], ["임대료", "한 달 기준 약 40~65만 원 (예시 금액)<br>지내시는 기간에 따라 인하해 드려요"], ["임대료 포함", "공과금(전기·수도·난방), 관리비, 인터넷, 공용 비품, 공용 복합기 사용"], ["이용 기간", "최소 6박 ~ 최대 6개월"], ["계약", "카카오톡·전화 상담 → 계약서 작성 → 결제 후 입주 확정"]],
     faq: ["숙박업소와는 어떻게 다른가요?", "임대료 말고 따로 드는 비용이 있나요?", "한 달 넘게 지내면 임대료는 어떻게 내나요?", "보증금은 언제 돌려받나요?", "지내다가 기간을 늘릴 수 있나요?"]
   }
 };
-const FAQ = {"cats":[{"key":"before","en":"BEFORE MOVING IN","name":"처음이라면","items":[{"home":true,"q":"쉐어하우스(셰어하우스)가 처음인데 지내기 괜찮을까요?","a":"함께 지내는 공간이지만 각자의 프라이버시는 충분히 지켜져요<br>방마다 개별 도어락이 있어 방문을 닫으면 온전히 나만의 공간이에요<br>거실과 주방, 세탁실만 함께 쓰고, 한 집에 최대 5명만 지내서 북적이지 않아요"},{"q":"숙박업소와는 어떻게 다른가요?","a":"로우카는 계약서를 쓰고 일정 기간 생활하는 주거형 단기 임대 공간이에요<br>침구류와 개인 위생용품(수건, 세면도구 등)은 제공되지 않아 따로 챙겨 와 주세요"},{"q":"혼자 쓰는 방이 있나요?","a":"즈므, 시나미, 윤슬 세 곳이 혼자 쓰는 1인실이에요<br>하슬라는 두 분이 함께 쓰는 셰어룸이고, 먼저 지내는 분이 계시면 같은 성별인 분과 함께 써요"},{"home":true,"q":"며칠부터 지낼 수 있나요?","a":"최소 6박부터 최대 6개월까지 계약하실 수 있어요<br>일주일 살기, 한 달 살기, 실습이나 출장 일정에 맞춰 편하게 정해 주세요"},{"q":"입주 가능한 날짜는 어떻게 확인하나요?","a":"<a href=\"#availability\">입주 가능일 달력</a>에서 날짜를 누르면 그날 입주할 수 있는 방이 보여요<br>입주일과 퇴거일을 고르시면 그 기간에 지낼 수 있는 방도 함께 확인하실 수 있어요"}]},{"key":"cost","en":"COST & CONTRACT","name":"비용 · 계약","items":[{"home":true,"q":"임대료 말고 따로 드는 비용이 있나요?","a":"공과금(전기·수도·난방)과 관리비, 인터넷, 공용 비품, 공용 복합기 사용까지<br>모두 임대료에 포함되어 있어요<br>입주하실 때 보증금 10~30만 원만 따로 준비해 주시면 돼요<br>공과금은 평균 사용량을 크게 넘을 때만 초과분을 따로 안내해 드리고,<br>내 집처럼 사용해 주시면 초과되지 않아요 :)"},{"q":"결제는 어떻게 하나요?","a":"상담 후 계약서를 작성하시면 결제 방법을 함께 안내해 드려요<br>임대료 결제까지 마치면 입주가 확정돼요"},{"q":"한 달 넘게 지내면 임대료는 어떻게 내나요?","a":"첫 달 임대료와 보증금을 입금하시면 입주가 확정돼요<br>그다음부터는 입주하신 날을 기준으로 매월 임대료를 입금해 주시면 돼요","home":true},{"q":"보증금은 언제 돌려받나요?","a":"퇴거하실 때 방 상태를 함께 확인한 뒤 돌려 드려요<br>자세한 내용은 계약할 때 차근차근 안내해 드릴게요"},{"q":"지내다가 기간을 늘릴 수 있나요?","a":"다음 입주 일정이 비어 있다면 최대 6개월까지 연장할 수 있어요<br>연장을 원하시면 퇴거일 전에 카카오톡으로 미리 말씀해 주세요"}]},{"key":"living","en":"LIVING","name":"생활","items":[{"home":true,"q":"무엇을 챙겨 가야 하나요?","a":"침구류와 개인 위생용품(수건, 세면도구 등)은 제공되지 않아 따로 챙겨 와 주세요<br>침구는 준비가 어려우신 경우에만 대여해 드려요<br>휴지와 세제 같은 공용 비품과 주방 식기는 준비되어 있어요"},{"q":"요리를 해 먹을 수 있나요?","a":"네, 공용 주방에서 자유롭게 요리하실 수 있어요<br>인덕션과 냉장고, 전자레인지, 에어프라이기, 발뮤다 토스터기, 일리 캡슐머신, 전기밥솥,<br>음식물처리기에 식기와 조리도구까지 갖춰져 있어요"},{"q":"빨래는 어떻게 하나요?","a":"세탁기와 건조기가 있는 세탁실을 자유롭게 쓰실 수 있어요<br>세제와 빨래 건조대도 준비되어 있어요"},{"q":"노트북으로 일하기 괜찮을까요?","a":"네, 와이파이가 있고 방마다 책상도 준비되어 있어요<br>거실 공용 공간도 다양한 일을 하기에 좋은 공간이에요"},{"home":true,"q":"보안은 괜찮은가요?","a":"로우카는 강릉대로 대로변에 있는 건물이라 늦은 시간에도 오가기 안심돼요<br>방마다 개별 도어락이 있고, 공용 공간에도 CCTV가 있어요<br>남녀 화장실과 샤워실도 따로 나뉘어 있어요"},{"q":"청소는 어떻게 하나요?","a":"지내시는 방은 직접 정리해 주셔야 해요<br>거실과 주방 같은 공용 공간은 주 1회 정기 청소를 하고 있으니, 평소에는 사용 후 뒷정리만 부탁드려요"},{"q":"흡연이나 반려동물은 괜찮나요?","a":"여럿이 함께 사는 공간이라 실내 흡연과 반려동물 동반은 어려워요<br>모두가 편하게 지낼 수 있도록 양해 부탁드려요"}]},{"key":"location","en":"LOCATION","name":"위치 · 교통","items":[{"q":"차 없이 지내도 괜찮을까요?","a":"네, KTX 강릉역까지 걸어서 5분이라 차 없이도 편하게 지내실 수 있어요<br>편의점은 3분, 월화거리는 5분, 홈플러스는 10분 거리라 장 보기도 걸어서 충분해요"},{"q":"주차할 수 있나요?","a":"입주가 확정되면 도보 5분 거리의 주차 장소를 안내해 드려요"},{"q":"강릉 병원 실습으로 방문하는데 지내기 괜찮을까요?","a":"강릉의료원은 차로 약 5분, 강릉동인병원은 약 7분, 강릉아산병원은 약 10~15분 거리예요<br>실습 일정에 맞춰 6박부터 계약하실 수 있어요<br>2인 셰어룸 하슬라는 함께 실습하는 친구분과 같이 지내기에도 좋아요"},{"q":"출장이나 교육으로 지내기에도 괜찮나요?","a":"KTX 강릉역에서 걸어서 5분이면 도착해요<br>강릉과학산업단지는 차로 약 15분, 강릉시청은 약 8분 거리예요"}]}]};
+const FAQ = {"cats":[{"key":"before","en":"BEFORE MOVING IN","name":"처음이라면","items":[{"home":true,"q":"쉐어하우스(셰어하우스)가 처음인데 지내기 괜찮을까요?","a":"함께 지내는 공간이지만 각자의 프라이버시는 충분히 지켜져요<br>방마다 개별 도어락이 있어 방문을 닫으면 온전히 나만의 공간이에요<br>거실과 주방, 세탁실만 함께 쓰고, 한 집에 최대 5명만 지내서 북적이지 않아요"},{"q":"숙박업소와는 어떻게 다른가요?","a":"로우카는 계약서를 쓰고 일정 기간 생활하는 주거형 단기 임대 공간이에요<br>침구류와 개인 위생용품(수건, 세면도구 등)은 제공되지 않아 따로 챙겨 와 주세요"},{"q":"혼자 쓰는 방이 있나요?","a":"즈므, 시나미, 윤슬 세 곳이 혼자 쓰는 1인실이에요<br>하슬라는 두 분이 함께 쓰는 셰어룸이고, 먼저 지내는 분이 계시면 같은 성별인 분과 함께 써요"},{"home":true,"q":"며칠부터 지낼 수 있나요?","a":"최소 6박부터 최대 6개월까지 계약하실 수 있어요<br>일주일 살기, 한 달 살기, 실습이나 출장 일정에 맞춰 편하게 정해 주세요"},{"q":"입주 가능한 날짜는 어떻게 확인하나요?","a":"<a href=\"#availability\">입주 가능일 달력</a>에서 날짜를 누르면 그날 입주할 수 있는 방이 보여요<br>입주일과 퇴거일을 고르시면 그 기간에 지낼 수 있는 방도 함께 확인하실 수 있어요"}]},{"key":"cost","en":"COST & CONTRACT","name":"비용 · 계약","items":[{"home":true,"q":"임대료 말고 따로 드는 비용이 있나요?","a":"공과금(전기·수도·난방)과 관리비, 인터넷, 공용 비품, 공용 복합기 사용까지 모두 임대료에 포함되어 있어요<br>입주하실 때 보증금 10~30만 원만 따로 준비해 주시면 돼요<br>공과금은 평균 사용량을 크게 넘을 때만 초과분을 따로 안내해 드리고, 내 집처럼 사용해 주시면 초과되지 않아요 :)"},{"q":"결제는 어떻게 하나요?","a":"상담 후 계약서를 작성하시면 결제 방법을 함께 안내해 드려요<br>임대료 결제까지 마치면 입주가 확정돼요"},{"q":"한 달 넘게 지내면 임대료는 어떻게 내나요?","a":"첫 달 임대료와 보증금을 입금하시면 입주가 확정돼요<br>그다음부터는 입주하신 날을 기준으로 매월 임대료를 입금해 주시면 돼요","home":true},{"q":"보증금은 언제 돌려받나요?","a":"퇴거하실 때 방 상태를 함께 확인한 뒤 돌려 드려요<br>자세한 내용은 계약할 때 차근차근 안내해 드릴게요"},{"q":"지내다가 기간을 늘릴 수 있나요?","a":"다음 입주 일정이 비어 있다면 최대 6개월까지 연장할 수 있어요<br>연장을 원하시면 퇴거일 전에 카카오톡으로 미리 말씀해 주세요"}]},{"key":"living","en":"LIVING","name":"생활","items":[{"home":true,"q":"무엇을 챙겨 가야 하나요?","a":"침구류와 개인 위생용품(수건, 세면도구 등)은 제공되지 않아 따로 챙겨 와 주세요<br>침구는 준비가 어려우신 경우에만 대여해 드려요<br>휴지와 세제 같은 공용 비품과 주방 식기는 준비되어 있어요"},{"q":"요리를 해 먹을 수 있나요?","a":"네, 공용 주방에서 자유롭게 요리하실 수 있어요<br>인덕션과 냉장고, 전자레인지, 에어프라이기, 발뮤다 토스터기, 일리 캡슐머신, 전기밥솥, 음식물처리기에 식기와 조리도구까지 갖춰져 있어요"},{"q":"빨래는 어떻게 하나요?","a":"세탁기와 건조기가 있는 세탁실을 자유롭게 쓰실 수 있어요<br>세제와 빨래 건조대도 준비되어 있어요"},{"q":"노트북으로 일하기 괜찮을까요?","a":"네, 와이파이가 있고 방마다 책상도 준비되어 있어요<br>거실 공용 공간도 다양한 일을 하기에 좋은 공간이에요"},{"home":true,"q":"보안은 괜찮은가요?","a":"로우카는 강릉대로 대로변에 있는 건물이라 늦은 시간에도 오가기 안심돼요<br>방마다 개별 도어락이 있고, 공용 공간에도 CCTV가 있어요<br>남녀 화장실과 샤워실도 따로 나뉘어 있어요"},{"q":"청소는 어떻게 하나요?","a":"지내시는 방은 직접 정리해 주셔야 해요<br>거실과 주방 같은 공용 공간은 주 1회 정기 청소를 하고 있으니, 평소에는 사용 후 뒷정리만 부탁드려요"},{"q":"흡연이나 반려동물은 괜찮나요?","a":"여럿이 함께 사는 공간이라 실내 흡연과 반려동물 동반은 어려워요<br>모두가 편하게 지낼 수 있도록 양해 부탁드려요"}]},{"key":"location","en":"LOCATION","name":"위치 · 교통","items":[{"q":"차 없이 지내도 괜찮을까요?","a":"네, KTX 강릉역까지 걸어서 5분이라 차 없이도 편하게 지내실 수 있어요<br>편의점은 3분, 월화거리는 5분, 홈플러스는 10분 거리라 장 보기도 걸어서 충분해요"},{"q":"주차할 수 있나요?","a":"입주가 확정되면 도보 5분 거리의 주차 장소를 안내해 드려요"},{"q":"강릉 병원 실습으로 방문하는데 지내기 괜찮을까요?","a":"강릉의료원은 차로 약 5분, 강릉동인병원은 약 7분, 강릉아산병원은 약 10~15분 거리예요<br>실습 일정에 맞춰 6박부터 계약하실 수 있어요<br>2인 셰어룸 하슬라는 함께 실습하는 친구분과 같이 지내기에도 좋아요"},{"q":"출장이나 교육으로 지내기에도 괜찮나요?","a":"KTX 강릉역에서 걸어서 5분이면 도착해요<br>강릉과학산업단지는 차로 약 15분, 강릉시청은 약 8분 거리예요"}]}]};
+// 문장마다 한 덩어리로 묶어, 긴 문장은 줄이 고르게 나뉘게 해요
+const lines = (h) => h.split("<br>").map((x) => `<span class="ln">${x.trim()}</span>`).join(" ");
 const faqByQ = (q) => { for (const c of FAQ.cats || []) for (const x of c.items) if (x.q === q) return x; return null; };
 function renderStay(key) {
   const st = STAYS[key]; if (!st) return;
@@ -1508,7 +1515,7 @@ function renderStay(key) {
     <div class="who">${st.points.map(([en, t, d]) => `<div class="who-item"><p class="en">${en}</p><h3>${t}</h3><p>${d}</p></div>`).join("")}</div>
     <div class="stay-cols">
       <div><h2 class="stay-h">한눈에 보기</h2><dl class="spec">${st.info.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl></div>
-      <div><h2 class="stay-h">자주 묻는 질문</h2><div class="faq-home">${st.faq.map(faqByQ).filter(Boolean).map((x) => `<details class="faq-item"><summary>${x.q}</summary><div class="a"><p>${fixLinks(x.a.replace(/<br>/g, " <br>"))}</p></div></details>`).join("")}</div></div>
+      <div><h2 class="stay-h">자주 묻는 질문</h2><div class="faq-home">${st.faq.map(faqByQ).filter(Boolean).map((x) => `<details class="faq-item"><summary>${x.q}</summary><div class="a"><p>${fixLinks(lines(x.a))}</p></div></details>`).join("")}</div></div>
     </div>
     <h2 class="stay-h">방 둘러보기</h2>
     <div class="other-grid stay-rooms">${ROOMS.map((o) => `<a href="${link("room-" + o.id)}"><span class="photo"><img src="${img(photosOf(o.id)[0])}" alt="강릉 단기임대 ${o.type} ${o.name}" loading="lazy"></span><span>${o.name}<small>${o.type}</small></span></a>`).join("")}</div>

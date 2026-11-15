@@ -15,7 +15,8 @@ GA_ID = 'G-FPXVGSQXRM'  # 구글 애널리틱스 측정 ID  # 실제 주소가 �
 
 # ---------- FAQ ----------
 def faq_item(x):
-    ans = x["a"].replace('<br>', ' <br>')  # 휴대폰에서 줄바꿈을 숨길 때 띄어쓰기가 붙지 않게
+    # 문장마다 한 덩어리로 (문장 안에서는 줄이 고르게 나뉘도록)
+    ans = ' '.join(f'<span class="ln">{seg.strip()}</span>' for seg in x["a"].split('<br>'))
     return f'<details class="faq-item"><summary>{x["q"]}</summary><div class="a"><p>{ans}</p></div></details>'
 faq_full = '\n'.join(
     f'<div class="faq-cat" id="faq-{c["key"]}"><div class="faq-cat-h"><p class="en">{c["en"]}</p><h2>{c["name"]}</h2></div>'
@@ -58,13 +59,13 @@ KEYWORDS = "강릉 단기임대, 강릉 달방, 강릉 한달살기, 강릉 한 
 PAGES = [
  ('', '', '로우카 쉐어하우스 | 강릉역 도보 5분 한달살기 · 단기임대 쉐어하우스',
   '강릉역 도보 5분, 교동의 주거형 단기 임대 쉐어하우스예요. 1인실 3개와 2인 셰어룸에서 6박부터 6개월까지 지낼 수 있어요.', 'og-home.jpg', '로우카 1인실 시나미'),
- ('jeumeu', 'room-jeumeu', '즈므 1인실 | 로우카 쉐어하우스',
+ ('jeumeu', 'room-jeumeu', '즈므 1인실 · 노을이 드는 창가 | 로우카 쉐어하우스',
   '해가 저무는 마을이라는 뜻의 1인실 즈므예요. 노을이 드는 방의 사진과 입주 가능일을 확인해 보세요.', 'og-jeumeu.jpg', '로우카 1인실 즈므'),
- ('sinami', 'room-sinami', '시나미 1인실 | 로우카 쉐어하우스',
+ ('sinami', 'room-sinami', '시나미 1인실 · 부드러운 빛이 드는 조용한 방 | 로우카 쉐어하우스',
   '강릉 말로 ‘천천히’라는 뜻의 1인실 시나미예요. 조용하고 밝은 방의 사진과 입주 가능일을 확인해 보세요.', 'og-sinami.jpg', '로우카 1인실 시나미'),
- ('yunseul', 'room-yunseul', '윤슬 1인실 | 로우카 쉐어하우스',
+ ('yunseul', 'room-yunseul', '윤슬 1인실 · 차분하고 아늑한 방 | 로우카 쉐어하우스',
   '반짝이는 물결을 뜻하는 1인실 윤슬이에요. 차분하고 아늑한 방의 사진과 입주 가능일을 확인해 보세요.', 'og-yunseul.jpg', '로우카 1인실 윤슬'),
- ('haseulla', 'room-haseulla', '하슬라 2인 셰어룸 | 로우카 쉐어하우스',
+ ('haseulla', 'room-haseulla', '하슬라 2인 셰어룸 · 둘이 함께 쓰는 방 | 로우카 쉐어하우스',
   '강릉의 옛 지명에서 이름을 딴 2인 셰어룸 하슬라예요. 방 사진과 입주 가능일을 확인해 보세요.', 'og-haseulla.jpg', '로우카 2인 셰어룸 하슬라'),
  ('facilities', 'facilities', '공용 공간 | 로우카 쉐어하우스',
   '로우카의 공용 거실과 주방, 남녀 화장실, 세탁실, 옥상정원을 사진으로 둘러보세요.', 'og-facilities.jpg', '로우카 공용 거실'),
