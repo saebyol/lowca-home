@@ -80,7 +80,7 @@ PAGES = [
  ('faq', 'faq', '자주 묻는 질문 | 로우카 쉐어하우스',
   '임대료와 보증금, 포함 항목, 준비물, 보안까지 로우카 입주 전 많이 묻는 질문을 모았어요.', 'og-faq.jpg', '로우카 공용 거실'),
 ]
-SECTIONS = {'about', 'for-you', 'rooms', 'facility-preview', 'availability', 'guide', 'process', 'faq-preview', 'check', 'location'}
+SECTIONS = {'about', 'for-you', 'rooms', 'facility-preview', 'availability', 'guide', 'process', 'faq-preview', 'check', 'kakaoBox', 'location'}
 
 def link(t, start, rootp):
     """JS의 link()와 같은 규칙"""
@@ -138,7 +138,7 @@ document.body.appendChild(d);setTimeout(function(){{d.remove()}},4000);}});}}cat
 ''' + ''.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>\n' for x in lds)
     h = head.replace('<title>로우카 쉐어하우스</title>', f'<title>{html.escape(title)}</title>\n' + seo)
     b = body_site
-    b = re.sub(r'href="#([a-z0-9-]+)"', lambda m: f'href="{link(m.group(1), start, rootp)}"', b)
+    b = re.sub(r'href="#([A-Za-z0-9-]+)"', lambda m: f'href="{link(m.group(1), start, rootp)}"', b)
     b = b.replace('src="images/', f'src="{rootp}images/')
     b = b.replace('<script>\n/* ===== 설정', f'<script src="{rootp}config.js"></script>\n<script>\n/* ===== 설정', 1)
     return f'<!doctype html>\n<html lang="ko">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n{h}</head>\n<body data-start="{start}" data-root="{rootp}">{b}</body>\n</html>\n'

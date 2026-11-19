@@ -154,6 +154,10 @@ a.photo:hover img,a:hover > .photo img{transform:scale(1.03)}
 .day.past{opacity:.35}
 .day.today .d{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--text);color:#fff;margin:-3px 0 0 -4px}
 .day.sel{outline:2px solid var(--point);outline-offset:-2px}
+.day.inrange{background:var(--bg-soft)}
+.day.end{outline:2px solid var(--point);outline-offset:-2px;background:var(--bg-soft)}
+.picked .hint{font-size:13px;color:var(--text-light)}
+.picked .warn{font-size:13px;color:var(--closed)}
 .cal-legend{display:grid;gap:2px;justify-items:end;text-align:right;font-size:12.5px;color:var(--text-mid);margin-top:14px}
 .no-avail .state,.no-avail .cal-wrap,.no-avail #checkList,.no-avail .check-list{display:none!important}
 .avail-wait{max-width:640px;margin:0 auto;text-align:center;display:grid;gap:22px;justify-items:center;background:var(--bg);padding:44px 24px}
@@ -397,6 +401,7 @@ footer{margin-top:120px;background:#2b2a29;color:#bdbab6;font-size:13px}
 
 @media (max-width:980px){
   .picked ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .picked h4 small{display:block;margin:4px 0 0}
   .guide-grid{grid-template-columns:minmax(0,1fr);gap:36px}
   .about,.loc-box{grid-template-columns:minmax(0,1fr);gap:28px}
   .nearby{grid-template-columns:minmax(0,1fr);gap:28px}
@@ -631,7 +636,7 @@ body{word-break:keep-all;overflow-wrap:break-word}
 
   <div class="res" id="availability">
     <div class="wrap">
-      <div class="title"><h2 class="en">AVAILABILITY</h2><p class="ko">날짜를 누르면 그날 입주 가능한 방을 확인할 수 있어요</p></div>
+      <div class="title"><h2 class="en">AVAILABILITY</h2><p class="ko">입주일과 퇴거일을 차례로 누르면 그 기간에 지낼 수 있는 방이 보여요</p></div>
       <div class="cal-wrap">
         <div class="cal-head">
           <button class="arrow" id="prevM" type="button" aria-label="이전 달">‹</button>
@@ -846,7 +851,7 @@ body{word-break:keep-all;overflow-wrap:break-word}
 
 <div class="fab" id="fab">
   <a class="fab-cal" href="#availability">입주 가능일</a>
-  <a class="fab-kakao" data-kakao target="_blank" rel="noopener">카카오톡 상담</a>
+  <a class="fab-kakao" href="#kakaoBox">카카오톡 상담</a>
   <a class="fab-tel" href="tel:0507-1489-0869" aria-label="전화 걸기">전화</a>
 </div>
 
@@ -982,6 +987,8 @@ const demo = !CONFIG.API_URL;
 const WAIT = SITE && demo;
 let viewMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 let pickedDay = TODAY;
+let pickedEnd = "";       // 퇴거일 (비어 있으면 입주일만 고른 상태)
+let pickedByUser = false;  // 처음 열었을 때 오늘 날짜는 손님이 고른 날이 아니에요
 const wanted = new Set();   // 상담 메시지에 넣을 방
 
 /* ---------- 계약 데이터 ---------- */
@@ -1176,7 +1183,7 @@ function renderCal() {
     const date = new Date(y, m, d), k = key(date), wd = date.getDay();
     const { singles, share } = freeOn(k);
     const past = k < TODAY;
-    const cls = ["day", wd === 0 ? "sun" : wd === 6 ? "sat" : "", past ? "past" : "", k === TODAY ? "today" : "", k === pickedDay ? "sel" : ""].join(" ");
+    const cls = ["day", wd === 0 ? "sun" : wd === 6 ? "sat" : "", past ? "past" : "", k === TODAY ? "today" : "", k === pickedDay ? "sel" : "", pickedEnd && k === pickedEnd ? "end" : "", pickedEnd && k > pickedDay && k < pickedEnd ? "inrange" : ""].join(" ");
     let r = "";
     if (!past) {
       r = singles || share
@@ -1189,20 +1196,55 @@ function renderCal() {
   }
   const tail = (first + days) % 7; if (tail) for (let i = tail; i < 7; i++) html += "<td></td>";
   $("#cal").innerHTML = html + "</tr></tbody>";
-  $("#cal").querySelectorAll(".day:not(:disabled)").forEach((b) => b.addEventListener("click", () => { pickedDay = b.dataset.k; renderCal(); renderPicked(); }));
+  $("#cal").querySelectorAll(".day:not(:disabled)").forEach((b) => b.addEventListener("click", () => {
+    const k = b.dataset.k;
+    const n = pickedEnd ? Math.round((parse(pickedEnd) - parse(pickedDay)) / 86400000) : 0;
+    const badRange = pickedEnd && (n < CONFIG.MIN_DAYS || n > CONFIG.MAX_DAYS);
+    // 퇴거일을 아직 안 골랐거나, 고른 기간이 6박보다 짧으면 → 이번 날짜를 퇴거일로
+    if (pickedByUser && (!pickedEnd || badRange) && k > pickedDay) pickedEnd = k;
+    else { pickedDay = k; pickedEnd = ""; pickedByUser = true; }
+    renderCal(); renderPicked();
+  }));
+}
+// 방 하나의 상태 문구 (달력 아래와 CHECK 목록에서 함께 써요)
+function roomStatus(room, total, free, inK, outK, single) {
+  const ok = free > 0;
+  if (ok) return total > 1 ? `${total}자리 중 ${free}자리 가능` : "입주 가능";
+  if (single) return "입주 마감";
+  let s = total > 1 ? "이 기간은 자리가 모두 찼어요" : "이 기간은 입주가 마감되었어요";
+  // 기간 안에서 가장 늦게 계약이 시작되는 자리를 기준으로 안내
+  const firsts = spotsOf(room.id).map((sp) => firstBooked(sp.id, inK, outK)).sort();
+  const fb = firsts[firsts.length - 1];
+  if (fb && fb > inK) s = `${md(parse(fb))}까지 지내실 수 있어요`;
+  else {
+    const nf = spotsOf(room.id).map((sp) => nextFree(sp.id, parse(inK))).filter(Boolean).sort((x, y) => x - y)[0];
+    if (nf) s = `${md(nf)}부터 입주할 수 있어요`;
+  }
+  return s;
 }
 function renderPicked() {
-  const d = parse(pickedDay), next = key(addDays(d, 1));
-  const list = roomsFor(pickedDay, next);
-  $("#picked").innerHTML = `<h4>${md(d)} (${WD[d.getDay()]})<small>입주할 수 있는 방</small></h4><ul>${list.map(({ room, total, free }) => {
+  const d = parse(pickedDay);
+  const range = !!pickedEnd;
+  const outK = range ? pickedEnd : key(addDays(d, 1));
+  const n = range ? Math.round((parse(outK) - d) / 86400000) : 0;
+  const tooShort = range && n < CONFIG.MIN_DAYS, tooLong = range && n > CONFIG.MAX_DAYS;
+  const e = range ? parse(outK) : null;
+  const head = range
+    ? `${md(d)} (${WD[d.getDay()]}) ~ ${md(e)} (${WD[e.getDay()]}) · ${n}박<small>이 기간에 지낼 수 있는 방</small>`
+    : `${md(d)} (${WD[d.getDay()]})<small>입주할 수 있는 방</small>`;
+  const list = roomsFor(pickedDay, outK);
+  const note = range
+    ? (tooShort || tooLong ? `<p class="warn">${lines("최소 6박부터 최대 6개월까지 계약하실 수 있어요<br>퇴거일을 다시 눌러 주세요")}</p>` : "")
+    : `<p class="hint">${pickedByUser ? "퇴거일을 누르면 그 기간 동안 지낼 수 있는 방을 확인할 수 있어요" : "입주일을 누른 뒤 퇴거일을 누르면 그 기간에 지낼 수 있는 방이 보여요"}</p>`;
+  $("#picked").innerHTML = `<h4>${head}</h4>${note}<ul>${list.map(({ room, total, free }) => {
     const ok = free > 0;
-    const s = total > 1 ? (ok ? `${total}자리 중 ${free}자리 가능` : "입주 마감") : ok ? "입주 가능" : "입주 마감";
-    return `<li class="${ok ? "" : "off"}"><span><a href="${link("room-" + room.id)}">${room.name}</a> <small>${room.type}</small></span><span class="s ${ok ? "y" : "n"}">${s}</span></li>`;
-  }).join("")}</ul><div class="picked-go"><button class="line-btn" type="button" id="pickGo">이 날짜로 입주 문의하기</button></div>`;
+    return `<li class="${ok ? "" : "off"}"><span><a href="${link("room-" + room.id)}">${room.name}</a> <small>${room.type}</small></span><span class="s ${ok ? "y" : "n"}">${roomStatus(room, total, free, pickedDay, outK, !range)}</span></li>`;
+  }).join("")}</ul><div class="picked-go"><button class="line-btn" type="button" id="pickGo">${range ? "이 기간으로 입주 문의하기" : "이 날짜로 입주 문의하기"}</button></div>`;
   $("#pickGo").addEventListener("click", () => {
     $("#fIn").value = pickedDay; onDates();
+    if (range && !tooShort && !tooLong) { $("#fOut").value = pickedEnd; onDates(); }
     $("#check").scrollIntoView({ block: "start" });
-    $("#fOut").focus();
+    if (!range || tooShort || tooLong) $("#fOut").focus();
   });
 }
 $("#prevM").addEventListener("click", () => { viewMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() - 1, 1); renderCal(); });
@@ -1222,19 +1264,7 @@ function renderCheck() {
     list.innerHTML = roomsFor(inK, outK).map(({ room, total, free }) => {
       const ok = free > 0;
       if (!ok) wanted.delete(room.id);
-      let s;
-      if (total > 1) s = ok ? `${total}자리 중 ${free}자리 가능` : "이 기간은 자리가 모두 찼어요";
-      else s = ok ? "입주 가능" : "이 기간은 입주가 마감되었어요";
-      if (!ok) {
-        // 기간 안에서 가장 늦게 계약이 시작되는 자리를 기준으로 안내
-        const firsts = spotsOf(room.id).map((sp) => firstBooked(sp.id, inK, outK)).sort();
-        const fb = firsts[firsts.length - 1];
-        if (fb && fb > inK) s = `${md(parse(fb))}까지 지내실 수 있어요`;
-        else {
-          const nf = spotsOf(room.id).map((sp) => nextFree(sp.id, parse(inK))).filter(Boolean).sort((x, y) => x - y)[0];
-          if (nf) s = `${md(nf)}부터 입주할 수 있어요`;
-        }
-      }
+      const s = roomStatus(room, total, free, inK, outK, false);
       return `<li class="${ok ? "" : "off"}">
         <div><a class="nm" href="${link("room-" + room.id)}">${room.name}</a><small>${room.type}</small></div>
         <span class="s ${ok ? "y" : "n"}">${s}</span>
@@ -1333,7 +1363,7 @@ function route() {
   }
   else {
     currentRoom = null; document.title = HOME_TITLE;
-    if (h === "check") renderCheck();
+    if (h === "check" || h === "kakaoBox") renderCheck();
     const target = h !== "home" && document.getElementById(h);
     if (target) requestAnimationFrame(() => target.scrollIntoView({ block: "start" })); else scrollTo(0, 0);
   }
@@ -1441,6 +1471,7 @@ document.addEventListener("click", (e) => {
   else if (a.id === "copyMsg") send("inquiry_copy", { room: [...wanted][0] || "상담 후 결정" });
   else if (a.id === "pickGo") send("date_inquiry");
   else if (/#availability$/.test(href)) send("availability_click");
+  else if (/#kakaoBox$/.test(href)) send("kakao_form_click");
 }, true);
 
 /* ---------- 시작 ---------- */
