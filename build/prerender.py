@@ -18,7 +18,8 @@ CLEAN = r"""(title) => {
     n.innerHTML = h.innerHTML; h.replaceWith(n);
   });
   // 날짜에 따라 바뀌는 입주 현황은 비워 두고, 열릴 때 새로 그려요
-  ['#cal', '#picked', '#monthLabel', '#checkList', '#kakaoMsg', '#nights'].forEach((s) => { const e = document.querySelector(s); if (e) e.innerHTML = ''; });
+  ['#cal', '#picked', '#monthLabel', '#checkList', '#kakaoMsg', '#nights', '#calPick'].forEach((s) => { const e = document.querySelector(s); if (e) e.innerHTML = ''; });
+  document.getElementById('cpHint')?.remove();
   document.querySelectorAll('.state').forEach((e) => (e.innerHTML = ''));
   document.querySelectorAll('.avail-wait').forEach((e) => e.remove());
   document.body.classList.remove('no-avail');

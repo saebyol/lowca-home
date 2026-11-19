@@ -178,6 +178,20 @@ a.photo:hover img,a:hover > .photo img{transform:scale(1.03)}
 /* availability */
 .res{background:var(--bg-soft);padding-block:110px;margin-top:110px}
 .cal-wrap{background:var(--bg);border:1px solid var(--line);padding:32px 32px 24px}
+.cal-pick{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto;align-items:center;gap:10px;margin-bottom:8px}
+.cp{display:grid;gap:3px;text-align:left;border:1px solid var(--line);background:var(--bg);padding:11px 16px;font:inherit;color:inherit;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.cp .l{font-size:12px;color:var(--text-light)}
+.cp .v{font-size:15px;font-weight:500}
+.cp .v.ph{font-weight:400;color:var(--text-light)}
+.cp.on{border-color:var(--point);box-shadow:0 0 0 1px var(--point)}
+.cp.on .l{color:var(--point);font-weight:500}
+.cp-sep{color:var(--text-light)}
+.cp-reset{border:0;background:none;font:inherit;font-size:13px;color:var(--text-mid);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px 2px}
+.cp-reset[hidden]{display:none}
+.cp-hint{font-size:13.5px;color:var(--point);margin:0 0 18px;display:flex;align-items:center;gap:8px}
+.cp-hint::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--point);animation:cpPulse 1.6s ease-in-out infinite}
+@keyframes cpPulse{0%,100%{opacity:1}50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.cp-hint::before{animation:none}}
 .cal-head{display:flex;align-items:center;justify-content:center;gap:28px;margin-bottom:22px}
 .cal-head h3{font-family:var(--en);font-weight:400;font-size:22px;letter-spacing:.06em;min-width:7em;text-align:center;font-variant-numeric:tabular-nums}
 .arrow{width:38px;height:38px;border:1px solid var(--line);background:var(--bg);cursor:pointer;font-size:16px;color:var(--text)}
@@ -187,7 +201,8 @@ a.photo:hover img,a:hover > .photo img{transform:scale(1.03)}
 .month th.sun{color:var(--sun)} .month th.sat{color:var(--sat)}
 .month td{border-bottom:1px solid var(--line);height:84px;vertical-align:top;padding:0}
 .day{width:100%;height:100%;border:0;background:transparent;padding:8px 8px 6px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;font:inherit;color:inherit}
-.day:hover:not(:disabled){background:var(--bg-soft)}
+.day:hover:not(:disabled){background:var(--bg-soft);box-shadow:inset 0 0 0 1px var(--point)}
+.day.hov{background:var(--bg-soft)}
 .day:disabled{cursor:default}
 .day .d{font-family:var(--en);font-size:13px}
 .day.sun .d{color:var(--sun)} .day.sat .d{color:var(--sat)}
@@ -483,6 +498,11 @@ footer{margin-top:120px;background:#2b2a29;color:#bdbab6;font-size:13px}
   .fac-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .other-grid{grid-template-columns:minmax(0,1fr)}
   .cal-wrap{padding:20px 10px 16px}
+  .cal-pick{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:6px}
+  .cp{padding:9px 10px}
+  .cp .v{font-size:14px}
+  .cp-reset{grid-column:1/-1;justify-self:end;padding:2px}
+  .cp-hint{font-size:13px;margin-bottom:14px}
   .month td{height:64px}
   .day{padding:6px 4px 4px}
   .month td{height:92px}
@@ -727,6 +747,7 @@ body{word-break:keep-all;overflow-wrap:break-word}
     <div class="wrap">
       <div class="title"><h2 class="en">AVAILABILITY</h2><p class="ko">입주일과 퇴거일을 차례로 누르면 그 기간에 지낼 수 있는 방이 보여요</p></div>
       <div class="cal-wrap">
+        <div class="cal-pick" id="calPick"></div>
         <div class="cal-head">
           <button class="arrow" id="prevM" type="button" aria-label="이전 달">‹</button>
           <h3 id="monthLabel" aria-live="polite"></h3>
@@ -1272,7 +1293,7 @@ function renderCal() {
     const date = new Date(y, m, d), k = key(date), wd = date.getDay();
     const { singles, share } = freeOn(k);
     const past = k < TODAY;
-    const cls = ["day", wd === 0 ? "sun" : wd === 6 ? "sat" : "", past ? "past" : "", k === TODAY ? "today" : "", k === pickedDay ? "sel" : "", pickedEnd && k === pickedEnd ? "end" : "", pickedEnd && k > pickedDay && k < pickedEnd ? "inrange" : ""].join(" ");
+    const cls = ["day", wd === 0 ? "sun" : wd === 6 ? "sat" : "", past ? "past" : "", k === TODAY ? "today" : "", pickedByUser && k === pickedDay ? "sel" : "", pickedEnd && k === pickedEnd ? "end" : "", pickedEnd && k > pickedDay && k < pickedEnd ? "inrange" : ""].join(" ");
     let r = "";
     if (!past) {
       r = singles || share
@@ -1294,6 +1315,35 @@ function renderCal() {
     else { pickedDay = k; pickedEnd = ""; pickedByUser = true; }
     renderCal(); renderPicked();
   }));
+  // 입주일을 고른 뒤 마우스를 올리면 기간을 미리 보여 줘요
+  const cells = [...$("#cal").querySelectorAll(".day:not(:disabled)")];
+  cells.forEach((b) => b.addEventListener("mouseenter", () => {
+    if (!pickedByUser || pickedEnd) return;
+    const h = b.dataset.k;
+    cells.forEach((c) => c.classList.toggle("hov", h > pickedDay && c.dataset.k > pickedDay && c.dataset.k <= h));
+  }));
+  $("#cal").onmouseleave = () => cells.forEach((c) => c.classList.remove("hov"));
+  renderPickBar();
+}
+function renderPickBar() {
+  const f = (k) => { const d = parse(k); return `${d.getMonth() + 1}월 ${d.getDate()}일 (${WD[d.getDay()]})`; };
+  const step = !pickedByUser ? "in" : !pickedEnd ? "out" : "done";
+  const hint = { in: "달력에서 입주하실 날짜를 눌러 주세요", out: "이제 퇴거하실 날짜를 눌러 주세요", done: "다른 기간을 보시려면 달력에서 입주일부터 다시 눌러 주세요" }[step];
+  $("#calPick").innerHTML = `
+    <button type="button" class="cp ${step === "in" ? "on" : ""}" data-m="in"><span class="l">입주일</span><span class="v ${pickedByUser ? "" : "ph"}">${pickedByUser ? f(pickedDay) : "날짜 선택"}</span></button>
+    <span class="cp-sep">~</span>
+    <button type="button" class="cp ${step === "out" ? "on" : ""}" data-m="out"><span class="l">퇴거일</span><span class="v ${pickedEnd ? "" : "ph"}">${pickedEnd ? f(pickedEnd) : "날짜 선택"}</span></button>
+    <button type="button" class="cp-reset" ${pickedByUser ? "" : "hidden"}>다시 고르기</button>`;
+  let h = $("#cpHint");
+  if (!h) { h = document.createElement("p"); h.id = "cpHint"; h.className = "cp-hint"; h.setAttribute("aria-live", "polite"); $("#calPick").after(h); }
+  h.textContent = hint;
+  $("#calPick").querySelectorAll(".cp").forEach((b) => b.addEventListener("click", () => {
+    if (b.dataset.m === "in") { pickedByUser = false; pickedEnd = ""; }
+    else if (pickedByUser) pickedEnd = "";
+    renderCal(); renderPicked();
+    $("#cal").scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }));
+  $("#calPick").querySelector(".cp-reset").addEventListener("click", () => { pickedByUser = false; pickedEnd = ""; pickedDay = TODAY; renderCal(); renderPicked(); });
 }
 // 방 하나의 상태 문구 (달력 아래와 CHECK 목록에서 함께 써요)
 function roomStatus(room, total, free, inK, outK, single) {
@@ -1320,11 +1370,11 @@ function renderPicked() {
   const e = range ? parse(outK) : null;
   const head = range
     ? `${md(d)} (${WD[d.getDay()]}) ~ ${md(e)} (${WD[e.getDay()]}) · ${n}박<small>이 기간에 지낼 수 있는 방</small>`
-    : `${md(d)} (${WD[d.getDay()]})<small>입주할 수 있는 방</small>`;
+    : `${pickedByUser ? "" : "오늘, "}${md(d)} (${WD[d.getDay()]})<small>입주할 수 있는 방</small>`;
   const list = roomsFor(pickedDay, outK);
   const note = range
     ? (tooShort || tooLong ? `<p class="warn">${lines("최소 6박부터 최대 6개월까지 계약하실 수 있어요<br>퇴거일을 다시 눌러 주세요")}</p>` : "")
-    : `<p class="hint">${pickedByUser ? "퇴거일을 누르면 그 기간 동안 지낼 수 있는 방을 확인할 수 있어요" : "입주일을 누른 뒤 퇴거일을 누르면 그 기간에 지낼 수 있는 방이 보여요"}</p>`;
+    : "";
   $("#picked").innerHTML = `<h4>${head}</h4>${note}<ul>${list.map(({ room, total, free }) => {
     const ok = free > 0;
     return `<li class="${ok ? "" : "off"}"><span><a href="${link("room-" + room.id)}">${room.name}</a> <small>${room.type}</small></span><span class="s ${ok ? "y" : "n"}">${roomStatus(room, total, free, pickedDay, outK, !range)}</span></li>`;
