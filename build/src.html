@@ -237,6 +237,11 @@ a.photo:hover img,a:hover > .photo img{transform:scale(1.03)}
 .check-dates select{height:44px;padding:0 10px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:400 14px var(--ko);border-radius:0}
 .check-dates input{height:44px;padding:0 12px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:400 14px var(--ko);border-radius:0;width:170px;max-width:100%}
 .check-dates input:focus{outline:none;border-color:var(--text)}
+/* 아이폰에서 날짜 칸이 박스 밖으로 넘치지 않게 */
+.check-dates input[type=date]{-webkit-appearance:none;appearance:none;min-width:0;box-sizing:border-box;display:block;line-height:44px;text-align:left}
+.check-dates input[type=date]::-webkit-date-and-time-value{text-align:left;margin:0}
+.date-wrap{position:relative;display:block;min-width:0}
+.ios .date-wrap.empty::after{content:"날짜 선택";position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text-light);pointer-events:none}
 .tilde{color:var(--text-light)}
 .hint{font-size:12.5px;color:var(--text-light)}
 .check-list{list-style:none;padding:0;margin:0}
@@ -547,6 +552,7 @@ footer{margin-top:120px;background:#2b2a29;color:#bdbab6;font-size:13px}
 .trust p,.who-item p,.spec dd,.room-meta .desc,.kakao-lead,.long-note,.cost-note,.about-text p{text-wrap:pretty;word-break:keep-all}
 p{text-wrap:pretty}
 .ln{display:block;text-wrap:pretty}
+.check-lead .ln{text-wrap:balance}
 .about-text p:not(.quote),.info .summary .ln{text-wrap:balance}
 body{word-break:keep-all;overflow-wrap:break-word}
 /* floating cta */
@@ -707,11 +713,11 @@ body{word-break:keep-all;overflow-wrap:break-word}
     <div class="wrap narrow">
       <div class="title"><h2 class="en">CHECK</h2><p class="ko">입주 가능한 방 확인하기</p></div>
       <div class="check-box">
-        <p class="check-lead">입주일과 퇴거일을 고르면 그 기간에 입주할 수 있는 방이 보여요<br>마음에 드는 방을 선택한 뒤 카카오톡으로 편하게 문의해 주세요</p>
+        <p class="check-lead"><span class="ln">입주일과 퇴거일을 고르면 그 기간에 입주할 수 있는 방이 보여요</span> <span class="ln">마음에 드는 방을 선택한 뒤 카카오톡으로 편하게 문의해 주세요</span></p>
         <div class="check-dates">
-          <label for="fIn">입주일</label><input type="date" id="fIn">
+          <label for="fIn">입주일</label><span class="date-wrap empty"><input type="date" id="fIn"></span>
           <span class="tilde">~</span>
-          <label for="fOut">퇴거일</label><input type="date" id="fOut">
+          <label for="fOut">퇴거일</label><span class="date-wrap empty"><input type="date" id="fOut"></span>
           <span class="hint" id="nights"></span>
           <span class="row-break" aria-hidden="true"></span>
           <label for="fGender">성별</label><select id="fGender"><option value="">선택</option><option>여성</option><option>남성</option></select>
@@ -1342,6 +1348,7 @@ function renderCheck() {
 }
 function onDates() {
   const fin = $("#fIn"), fout = $("#fOut");
+  [fin, fout].forEach((i) => i.parentNode.classList.toggle("empty", !i.value));
   if (fin.value) { const minOut = key(addDays(parse(fin.value), CONFIG.MIN_DAYS)); fout.min = minOut; fout.max = key(addDays(parse(fin.value), CONFIG.MAX_DAYS)); if (fout.value && fout.value < minOut) fout.value = ""; }
   renderCheck();
 }
@@ -1478,6 +1485,8 @@ const STAYS = {
 };
 const FAQ = /*@FAQ*/{};
 // 문장마다 한 덩어리로 묶어, 긴 문장은 줄이 고르게 나뉘게 해요
+// 아이폰은 빈 날짜 칸에 아무것도 안 보여서 '날짜 선택'을 대신 보여 줘요
+if (/iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) document.documentElement.classList.add("ios");
 const lines = (h) => h.split("<br>").map((x) => `<span class="ln">${x.trim()}</span>`).join(" ");
 const faqByQ = (q) => { for (const c of FAQ.cats || []) for (const x of c.items) if (x.q === q) return x; return null; };
 function renderStay(key) {
